@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Blueberry;
+    src: url(../assets/Fonts/Blueberry-Cream.ttf);
+}
+
+.body{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.body__header{
+    font-family: Blueberry;
+    font-size: 45px;
+    color: darkslateblue;
+}
+
+.body__text{
+
+}

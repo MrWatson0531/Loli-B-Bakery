@@ -1,0 +1,47 @@
+@font-face {
+    font-family: Lumanosimo;
+    src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
+}
+
+.header{
+    display:flex;
+    height:  150px;
+    align-items:center;
+    width: 100%;
+    background-color: white;
+}
+
+.header__block{
+    display: flex;
+    flex-direction: column;
+}
+
+.header__nav-links{
+   display: flex;
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   justify-content: center;
+   margin-right: 100px ;
+}
+
+.header__nav-link{
+    font-family: 'Lumanosimo';
+}
+
+.header__logo{
+    height: 150px;
+}
+
+.header__offer{
+    display: flex;
+    background-color:darkslateblue;
+    color: white;
+    font-family: 'Lumanosimo';
+    font-size: 15px;
+    line-height: 40px;
+    height: 40px;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
