@@ -2,6 +2,24 @@
     font-family: Lumanosimo;
     src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
 }
+@font-face {
+    font-family: Blueberry;
+    src: url(../assets/Fonts/Blueberry-Cream.ttf);
+}
+@font-face {
+    font-family: Delicate;
+    src: url(../assets/Fonts/DelicateCaligraphy.ttf);
+}
+@font-face {
+    font-family: Second;
+    src: url(../assets/Fonts/SecondChild.ttf);
+}
+@font-face {
+    font-family: Caviar;
+    src: url(../assets/Fonts/CaviarDreams.ttf);
+}
+
+
 
 .header{
     display:flex;
@@ -9,6 +27,7 @@
     align-items:center;
     width: 100%;
     background-color: white;
+    flex-direction: column;
 }
 
 .header__block{
@@ -21,21 +40,29 @@
    list-style-type: none;
    margin: 0;
    padding: 0;
-   justify-content: center;
+   align-items: center;
    margin-right: 100px ;
 }
 
 .header__nav-link{
     font-family: 'Lumanosimo';
+    cursor: pointer;
+    color: grey;
+    margin-left: auto;
+}
+
+.header__nav-link:hover{
+    color: rgb(48, 42, 104);
 }
 
 .header__logo{
     height: 150px;
+    display: flex;
 }
 
 .header__offer{
     display: flex;
-    background-color:darkslateblue;
+    background-color:rgb(48, 42, 104);
     color: white;
     font-family: 'Lumanosimo';
     font-size: 15px;
@@ -44,4 +71,9 @@
     justify-content: center;
     width: 100%;
     margin: 0;
+}
+
+.header__nav-box{
+    display: flex;
+    align-items: center;
 }
