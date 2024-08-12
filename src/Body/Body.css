@@ -16,6 +16,7 @@
 }
 
 .body__mid-header{
+    color: rgb(48, 42, 104);
     font-family: Second;
     display: flex;
     justify-content: center;

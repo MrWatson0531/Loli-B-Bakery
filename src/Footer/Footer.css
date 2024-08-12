@@ -1,0 +1,13 @@
+.footer{
+    background-color: rgb(146, 146, 154);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+}
+
+.footer__legal-section{
+    display: flex;
+    justify-content: space-between;
+}

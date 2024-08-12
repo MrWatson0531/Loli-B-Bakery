@@ -6,6 +6,9 @@ import Footer from "../Footer/Footer";
 import About from "../About/About";
 import AlexWorld from "../AlexWorld/AlexWorld";
 import Body from "../Body/Body";
+import Shop from "../Shop/Shop";
+import Contact from "../Contact/Contact";
+import Cart from "../Cart/Cart";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -29,22 +32,16 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header
-          handleHomeClick={handleHomeClick}
-          handleCartClick={handleCartClick}
-          handleAboutClick={handleAboutClick}
-          handleShopClick={handleShopClick}
-          handleContactClick={handleContactClick}
-          handleAlexClick={handleAlexClick}
-        />
-        <Main
-          handleHomeClick={handleHomeClick}
-          handleCartClick={handleCartClick}
-          handleAboutClick={handleAboutClick}
-          handleShopClick={handleShopClick}
-          handleContactClick={handleContactClick}
-          handleAlexClick={handleAlexClick}
-        />
+        <Header/>
+        <Routes>
+          <Route path="/About" element={<About/>}/>
+          <Route path="/AlexWorld" element={<AlexWorld/>}/>
+          <Route path="/Shop" element={<Shop/>}/>
+          <Route path="/Contact" element={<Contact/>}/>
+          <Route path="/Body" element={<Body/>}/>
+          <Route path="Cart" element={<Cart/>}/>
+        </Routes>
+        <Main/>
         <Footer handleSocialClick={handleSocialClick}/>
       </div>
     </div>
