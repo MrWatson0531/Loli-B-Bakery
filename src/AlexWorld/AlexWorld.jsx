@@ -8,28 +8,28 @@ function AlexWorld ({}){
             <Header/>
             <ul className="alex__blog-list">
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">
-                    <img src={blog.image} alt="" className="alex__img" />
-                    <p className="alex__blog-title">{blog.title}</p>
+                    
+                    <p className="alex__blog-title">A</p>
                 </div>
             </ul>
             <Footer/>

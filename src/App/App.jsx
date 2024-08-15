@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -12,7 +13,38 @@ import Cart from "../Cart/Cart";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [theme, setTheme] = React.useState('day');
+  const [page, setPage] = useState('Body');
+
+  function handleThemeChange(e) {
+    setTheme(e.target.value);
+  }
+
+  function ThemeSelect(props) {
+    return (
+      <select onChange={props.onChange}>
+        <option value="day">Day</option>
+        <option value="night">Night</option>
+      </select>
+    );
+  }
+
+  function ThemeIcon(props) {
+    return (
+      <div className="icon">
+        {props.theme === 'day' ? '🔆' : '🌙'}
+      </div>
+    );
+  }
+
+  function ThemeSelect(props) {
+    return (
+      <select onChange={props.onChange}>
+        <option value="day">Day {props.theme === 'day' && '✅'}</option>
+        <option value="night">Night {props.theme === 'night' && '✅'}</option>
+      </select>
+    );
+  }
 
   const handleHomeClick = () => {};
 
@@ -32,6 +64,11 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
+      <div className={theme}>
+      <h2>Welcome</h2>
+      <ThemeIcon theme={theme} />
+      <ThemeSelect onChange={handleThemeChange} />
+    </div>
         <Header/>
         <Routes>
           <Route path="/About" element={<About/>}/>
