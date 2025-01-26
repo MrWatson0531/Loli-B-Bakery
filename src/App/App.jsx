@@ -1,5 +1,4 @@
-import { useState } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -11,40 +10,49 @@ import Shop from "../Shop/Shop";
 import Contact from "../Contact/Contact";
 import CartModal from "../Cart/CartModal";
 import { Routes, Route } from "react-router-dom";
+import { itemOptions } from "../utils/constants";
+import {getItems, addItem, deleteItem, getCart} from "../utils/api"
+
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const App = express();
 
 function App() {
-  const [theme, setTheme] = React.useState("day");
   const [page, setPage] = useState("Body");
+  const [activeModal, setActiveModal] = useState("");
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState([]);
+  // function handleThemeChange(e) {
+  //   setTheme(e.target.value);
+  // }
 
-  function handleThemeChange(e) {
-    setTheme(e.target.value);
-  }
+  // function ThemeSelect(props) {
+  //   return (
+  //     <select onChange={props.onChange}>
+  //       <option value="day">Day</option>
+  //       <option value="night">Night</option>
+  //     </select>
+  //   );
+  // }
 
-  function ThemeSelect(props) {
-    return (
-      <select onChange={props.onChange}>
-        <option value="day">Day</option>
-        <option value="night">Night</option>
-      </select>
-    );
-  }
+  // function ThemeIcon(props) {
+  //   return <div className="icon">{props.theme === "day" ? "🔆" : "🌙"}</div>;
+  // }
 
-  function ThemeIcon(props) {
-    return <div className="icon">{props.theme === "day" ? "🔆" : "🌙"}</div>;
-  }
-
-  function ThemeSelect(props) {
-    return (
-      <select onChange={props.onChange}>
-        <option value="day">Day {props.theme === "day" && "✅"}</option>
-        <option value="night">Night {props.theme === "night" && "✅"}</option>
-      </select>
-    );
-  }
+  // function ThemeSelect(props) {
+  //   return (
+  //     <select onChange={props.onChange}>
+  //       <option value="day">Day {props.theme === "day" && "✅"}</option>
+  //       <option value="night">Night {props.theme === "night" && "✅"}</option>
+  //     </select>
+  //   );
+  // }
 
   const handleHomeClick = () => {};
 
-  const handleCartClick = () => {};
+  const handleCartClick = () => {
+    setActiveModal("open");
+  };
 
   const handleAboutClick = () => {};
 
@@ -56,25 +64,58 @@ function App() {
 
   const handleSocialClick = () => {};
 
+  const handleCloseClick = (e) => {
+    console.log(e);
+    setActiveModal("");
+  };
+
+  // function handleAddItem({ id }) {}
+
+  useEffect(() => {
+    setItems(itemOptions)
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        <div className={theme}>
-          <h2>Welcome</h2>
-          <ThemeIcon theme={theme} />
-          <ThemeSelect onChange={handleThemeChange} />
-        </div>
-        <Header />
+        <Header
+          handleCartClick={handleCartClick}
+          handleHomeClick={handleHomeClick}
+          handleAboutClick={handleAboutClick}
+          handleShopClick={handleShopClick}
+        />
         <Routes>
-          <Route path="/About" element={<About />} />
-          <Route path="/AlexWorld" element={<AlexWorld />} />
-          <Route path="/Shop" element={<Shop />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Body" element={<Body />} />
-          <Route path="CartModal" element={<CartModal />} />
+          <Route
+            path="/About"
+            element={<About handleCartClick={handleCartClick} />}
+          />
+          <Route
+            path="/AlexWorld"
+            element={<AlexWorld handleCartClick={handleCartClick} />}
+          />
+          <Route
+            path="/Shop"
+            element={<Shop handleCartClick={handleCartClick} />}
+            items = {items}
+          />
+          <Route
+            path="/Contact"
+            element={<Contact handleCartClick={handleCartClick} />}
+          />
+          <Route
+            path="/Body"
+            element={<Body handleCartClick={handleCartClick} items = {items} />}
+            
+          />
+          <Route path="/" element={<Main />} />
         </Routes>
-        <Main />
         <Footer handleSocialClick={handleSocialClick} />
+        {activeModal === "open" && (
+          <CartModal
+            isOpen={activeModal === "open"}
+            handleCloseClick={handleCloseClick}
+          ></CartModal>
+        )}
       </div>
     </div>
   );

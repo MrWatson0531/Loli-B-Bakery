@@ -5,7 +5,6 @@ import Footer from "../Footer/Footer";
 function Contact({ handleFormSubmit }) {
   return (
     <section className="contact">
-      <Header />
       <h2 className="contact__header">Contact Us</h2>
       <p className="contact__text">
         If you have questions or want a custom order for a special occasion, or
@@ -56,7 +55,6 @@ function Contact({ handleFormSubmit }) {
         <li className="contact__img"></li>
         <li className="contact__img"></li>
       </ul>
-      <Footer />
     </section>
   );
 }

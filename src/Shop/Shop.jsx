@@ -5,8 +5,6 @@ import Footer from "../Footer/Footer";
 function Shop({}){
     return(
         <section className="shop">
-            <Header/>
-            <Footer/>
         </section>
     )
 }

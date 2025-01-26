@@ -1,43 +1,87 @@
-
-
-.body{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
+@font-face {
+  font-family: Lumanosimo;
+  src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
+}
+@font-face {
+  font-family: Blueberry;
+  src: url(../assets/Fonts/Blueberry-Cream.ttf);
+}
+@font-face {
+  font-family: Delicate;
+  src: url(../assets/Fonts/DelicateCaligraphy.ttf);
+}
+@font-face {
+  font-family: Second;
+  src: url(../assets/Fonts/SecondChild.ttf);
+}
+@font-face {
+  font-family: Sweet;
+  src: url(../Assets/Fonts/Sweetgentle.ttf);
+}
+@font-face {
+  font-family: Angeline;
+  src: url(../Assets/Fonts/AngelineVintage.ttf);
 }
 
-.body__header{
-    display: flex;
-    font-family: Second;
-    font-size: 45px;
-    color: rgb(48, 42, 104);
-    justify-content: center;
-    font-size: 100px;;
+.body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 }
 
-.body__mid-header{
-    color: rgb(48, 42, 104);
-    font-family: Second;
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
+.body__content {
+  position: relative;
+  z-index: 1;
 }
 
-.body__text{
-    font-family: Caviar;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
+.body__parallax {
+  background: url(src/assets/loli_B_assets/LoliStockVid2.mp4) fixed center
+    no-repeat cover;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.body__btn{
-    background-color: rgb(48, 42, 104);
-    color: white;
-    width: 100%;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    font-family: Blueberry;
-    font-size: 30px;
+.body__header {
+  display: flex;
+  font-family: "Angeline";
+  font-size: 45px;
+  color: rgb(48, 42, 104);
+  justify-content: center;
+  font-size: 100px;
+}
+
+.body__mid-header {
+  color: rgb(48, 42, 104);
+  font-family: "Angeline";
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
+
+.body__text {
+  font-family: "Caviar";
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.body__btn {
+  background-color: rgb(48, 42, 104);
+  cursor: pointer;
+  color: white;
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  font-family: "Caviar";
+  font-size: 30px;
+  align-items: center;
+  margin: 100;
 }

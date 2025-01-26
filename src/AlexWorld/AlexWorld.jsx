@@ -5,7 +5,6 @@ import "../AlexWorld/AlexWorld.css";
 function AlexWorld ({}){
     return (
         <section className="alex">
-            <Header/>
             <ul className="alex__blog-list">
                 <div className="alex__img-block">
                     
@@ -32,7 +31,6 @@ function AlexWorld ({}){
                     <p className="alex__blog-title">A</p>
                 </div>
             </ul>
-            <Footer/>
         </section>
     );
 }
