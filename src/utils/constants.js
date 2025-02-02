@@ -105,3 +105,26 @@ export const itemOptions = [
     url: new URL("../Assets/loli_B_assets/Snacks_22.jpg", import.meta.url).href,
   },
 ];
+
+export const slides = [
+  {
+      url: new URL("../Assets/loli_B_assets/Snacks_18.jpg", import.meta.url).href,
+      alt:"Lion Cupcake"
+  },
+  {
+      url: new URL("../Assets/loli_B_assets/Snacks_2.jpg", import.meta.url).href,
+      alt:"Monster Cupcake"
+  },
+  {
+      url: new URL("../Assets/loli_B_assets/Snacks_3.jpg", import.meta.url).href,
+      alt:"Reeses Cookie"
+  },
+  {
+      url: new URL("../Assets/loli_B_assets/Snacks_10.jpg", import.meta.url).href,
+      alt:"Champagne Cupcake"
+  },
+  {
+      url: new URL("../Assets/loli_B_assets/Snacks_4.jpg", import.meta.url).href,
+      alt:"Oreo Cupcake"
+  },
+]

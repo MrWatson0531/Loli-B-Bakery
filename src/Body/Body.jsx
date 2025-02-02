@@ -3,7 +3,7 @@ import Cards from "../Cards/Cards";
 import "../Body/Body.css";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 
-function Body({ handleAboutClick, handleShopClick, handleAlexClick, items }) {
+function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carousel}) {
   return (
     <section className="body">
       <ParallaxProvider>
@@ -11,7 +11,7 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items }) {
           <Parallax speed={-80}>
             <video autoPlay loop muted className="background__video">
               <source
-                src="src/assets/loli_B_assets/LoliStockVid2.mp4"
+                src="src/assets/loli_B_assets/LoliStockVid.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -42,14 +42,14 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items }) {
           </p>
         </h2>
         <button
-          className="body__btn"
+          className="body__mid-btn"
           onClick={handleAboutClick}
           type="button"
-          id="body__about-btn"
+          id="body__shop-mid-btn"
         >
           A LITTLE MORE ABOUT LOLI B BAKERY
         </button>
-        <div className="body__card-scroll"></div>
+        {/* <Carousel/> */}
         <h2 className="body__mid-header">Our Family Recipes</h2>
         <h2 className="body__text">
           <p>Our family recipes are sacred!</p>{" "}

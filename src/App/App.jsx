@@ -9,9 +9,11 @@ import Body from "../Body/Body";
 import Shop from "../Shop/Shop";
 import Contact from "../Contact/Contact";
 import CartModal from "../Cart/CartModal";
+// import { carousel } from "../Carousel/carousel";
 import { Routes, Route } from "react-router-dom";
 import { itemOptions } from "../utils/constants";
 import {getItems, addItem, deleteItem, getCart} from "../utils/api"
+import Carousel from "../Carousel/Carousel";
 
 // const express = require("express");
 // const mongoose = require("mongoose");
@@ -104,7 +106,7 @@ function App() {
           />
           <Route
             path="/Body"
-            element={<Body handleCartClick={handleCartClick} items = {items} />}
+            element={<Body handleCartClick={handleCartClick} items = {items} carousel={Carousel}  />}
             
           />
           <Route path="/" element={<Main />} />

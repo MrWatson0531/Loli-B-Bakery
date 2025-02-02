@@ -17,7 +17,7 @@ function Header({
         We are offering free shipping on all orders
       </h1>
       <div className="header__links">
-        <div className="header__nav-box-1">
+        <div className="header__nav-box">
           <ul className="header__nav-links">
             <li>
               <Link
@@ -47,9 +47,7 @@ function Header({
               </Link>
             </li>
           </ul>
-        </div>
         <img src={Logo} alt="Loli B Logo" className="header__logo" />
-        <div className="header__nav-box-2">
           <ul className="header__nav-links">
             <li>
               <Link
