@@ -12,8 +12,8 @@ import CartModal from "../Cart/CartModal";
 // import { carousel } from "../Carousel/carousel";
 import { Routes, Route } from "react-router-dom";
 import { itemOptions } from "../utils/constants";
-import {getItems, addItem, deleteItem, getCart} from "../utils/api"
-import Carousel from "../Carousel/Carousel";
+import { getItems, addItem, deleteItem, getCart } from "../utils/api";
+// import Carousel from "../Carousel/Carousel";
 
 // const express = require("express");
 // const mongoose = require("mongoose");
@@ -74,7 +74,7 @@ function App() {
   // function handleAddItem({ id }) {}
 
   useEffect(() => {
-    setItems(itemOptions)
+    setItems(itemOptions);
   }, []);
 
   return (
@@ -98,7 +98,7 @@ function App() {
           <Route
             path="/Shop"
             element={<Shop handleCartClick={handleCartClick} />}
-            items = {items}
+            items={items}
           />
           <Route
             path="/Contact"
@@ -106,8 +106,12 @@ function App() {
           />
           <Route
             path="/Body"
-            element={<Body handleCartClick={handleCartClick} items = {items} carousel={Carousel}  />}
-            
+            element={
+              <Body
+                handleCartClick={handleCartClick}
+                items={items}
+              />
+            }
           />
           <Route path="/" element={<Main />} />
         </Routes>

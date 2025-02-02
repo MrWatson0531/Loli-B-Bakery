@@ -49,12 +49,6 @@ function Contact({ handleFormSubmit }) {
       <button className="contact__submit" type="submit">
         SUBMIT
       </button>
-      <ul className="contact__img-list">
-        <li className="contact__img"></li>
-        <li className="contact__img"></li>
-        <li className="contact__img"></li>
-        <li className="contact__img"></li>
-      </ul>
     </section>
   );
 }
