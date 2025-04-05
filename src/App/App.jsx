@@ -9,10 +9,13 @@ import Body from "../Body/Body";
 import Shop from "../Shop/Shop";
 import Contact from "../Contact/Contact";
 import CartModal from "../Cart/CartModal";
+import ItemModal from "../ItemModal/ItemModal";
+
 // import { carousel } from "../Carousel/carousel";
 import { Routes, Route } from "react-router-dom";
-import { itemOptions } from "../utils/constants";
+import { itemOptions } from "../utils/contexts/constants";
 import { getItems, addItem, deleteItem, getCart } from "../utils/api";
+import { CurrentCardContext } from "../utils/contexts/CurrentCardContext";
 // import Carousel from "../Carousel/Carousel";
 
 // const express = require("express");
@@ -24,105 +27,88 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
-  // function handleThemeChange(e) {
-  //   setTheme(e.target.value);
-  // }
+  const [cart, setCart] = useState([]);
 
-  // function ThemeSelect(props) {
-  //   return (
-  //     <select onChange={props.onChange}>
-  //       <option value="day">Day</option>
-  //       <option value="night">Night</option>
-  //     </select>
-  //   );
-  // }
-
-  // function ThemeIcon(props) {
-  //   return <div className="icon">{props.theme === "day" ? "🔆" : "🌙"}</div>;
-  // }
-
-  // function ThemeSelect(props) {
-  //   return (
-  //     <select onChange={props.onChange}>
-  //       <option value="day">Day {props.theme === "day" && "✅"}</option>
-  //       <option value="night">Night {props.theme === "night" && "✅"}</option>
-  //     </select>
-  //   );
-  // }
-
-  const handleHomeClick = () => {};
-
-  const handleCartClick = () => {
-    setActiveModal("open");
+  const handleAddToCart = (items) => {
+    addItem().then((res) => {
+      const updatedItems = items.filter((item) => {
+        return item._id === item._id;
+      });
+    });
   };
 
-  const handleAboutClick = () => {};
+  const handleCartClick = () => {
+    setActiveModal("cart");
+  };
 
-  const handleShopClick = () => {};
-
-  const handleContactClick = () => {};
-
-  const handleAlexClick = () => {};
-
-  const handleSocialClick = () => {};
+  const handleItemClick = (item) => {
+    setActiveModal("item");
+    setSelectedItem(item);
+  };
 
   const handleCloseClick = (e) => {
     console.log(e);
     setActiveModal("");
   };
 
-  // function handleAddItem({ id }) {}
-
   useEffect(() => {
-    setItems(itemOptions);
+    getItems()
+      .then((itemOptions) => {
+        setItems(itemOptions);
+      })
+      .catch(console.error);
   }, []);
 
   return (
     <div className="page">
-      <div className="page__content">
-        <Header
-          handleCartClick={handleCartClick}
-          handleHomeClick={handleHomeClick}
-          handleAboutClick={handleAboutClick}
-          handleShopClick={handleShopClick}
-        />
-        <Routes>
-          <Route
-            path="/About"
-            element={<About handleCartClick={handleCartClick} />}
-          />
-          <Route
-            path="/AlexWorld"
-            element={<AlexWorld handleCartClick={handleCartClick} />}
-          />
-          <Route
-            path="/Shop"
-            element={<Shop handleCartClick={handleCartClick} />}
-            items={items}
-          />
-          <Route
-            path="/Contact"
-            element={<Contact handleCartClick={handleCartClick} />}
-          />
-          <Route
-            path="/Body"
-            element={
-              <Body
-                handleCartClick={handleCartClick}
-                items={items}
-              />
-            }
-          />
-          <Route path="/" element={<Main />} />
-        </Routes>
-        <Footer handleSocialClick={handleSocialClick} />
-        {activeModal === "open" && (
+      <CurrentCardContext.Provider value={{ cart, setCart }}>
+        <div className="page__content">
+          <Header handleCartClick={handleCartClick} />
+          <Routes>
+            <Route
+              path="/About"
+              element={<About handleCartClick={handleCartClick} />}
+            />
+            <Route
+              path="/AlexWorld"
+              element={<AlexWorld handleCartClick={handleCartClick} />}
+            />
+            <Route
+              path="/Shop"
+              element={
+                <Shop
+                  handleCartClick={handleCartClick}
+                  handleItemClick={handleItemClick}
+                />
+              }
+              items={items}
+            />
+            <Route
+              path="/Contact"
+              element={<Contact handleCartClick={handleCartClick} />}
+            />
+            <Route
+              path="/Body"
+              element={<Body handleCartClick={handleCartClick} items={items} />}
+            />
+            <Route path="/" element={<Main />} />
+          </Routes>
+          <Footer />
           <CartModal
-            isOpen={activeModal === "open"}
+            isOpen={activeModal === "cart"}
             handleCloseClick={handleCloseClick}
+            cart={cart}
+            setCart={setCart}
           ></CartModal>
-        )}
-      </div>
+          <ItemModal
+            isOpen={activeModal === "item"}
+            handleCloseClick={handleCloseClick}
+            item={selectedItem}
+            setSelectedItem={setSelectedItem}
+            setActiveModal={setActiveModal}
+          ></ItemModal>
+        </div>
+      </CurrentCardContext.Provider>
     </div>
   );
 }

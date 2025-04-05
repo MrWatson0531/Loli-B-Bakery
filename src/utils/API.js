@@ -5,21 +5,20 @@ function checkResponse(res) {
 }
 
 function deleteItem(id) {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${baseUrl}/${localStorage.removeItem()}`, {
     method: "DELETE",
   }).then(checkResponse);
 }
 
-function addItem({ name, imageUrl, price }) {
-  return fetch(`${baseUrl}/items`, {
+function addItem(id) {
+  return (`${baseUrl}/${localStorage.setItem()}`, { //TODO: you can't take id from localStorage
     method: "POST",
-    body: JSON.stringify({ name: name, imageUrl: imageUrl, price: price }),
     headers: { "content-type": "application/json" },
   }).then(checkResponse);
 }
 
 function getItems() {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${baseUrl}/`, {
     headers: { "content-type": "application/json" },
   }).then(checkResponse);
 }

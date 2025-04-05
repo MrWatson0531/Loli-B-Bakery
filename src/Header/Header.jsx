@@ -14,7 +14,8 @@ function Header({
   return (
     <header className="header">
       <h1 className="header__offer">
-        We are offering free shipping on all orders
+        WE ARE OFFERING FREE SHIPPING ON ALL ORDERS!
+        
       </h1>
       <div className="header__links">
         <div className="header__nav-box">

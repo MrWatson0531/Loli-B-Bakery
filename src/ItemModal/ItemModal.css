@@ -1,0 +1,24 @@
+.itemModal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  padding: 0 19px;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.6s, opacity 0.6s;
+}
+
+.itemModal_opened {
+  visibility: visible;
+  opacity: 1;
+  transition: 0s, 0.6s;
+}
+
+.itemModal__surface {
+}

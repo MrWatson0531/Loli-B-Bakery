@@ -2,8 +2,9 @@ import React from "react";
 import Cards from "../Cards/Cards";
 import "../Body/Body.css";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+// import Carousel from "../Carousel/carousel";
 
-function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carousel}) {
+function Body({ handleAboutClick, handleShopClick, items, carousel }) {
   return (
     <section className="body">
       <ParallaxProvider>
@@ -11,7 +12,7 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carou
           <Parallax speed={-80}>
             <video autoPlay loop muted className="background__video">
               <source
-                src="src/assets/loli_B_assets/LoliStockVid.mp4"
+                src="src/assets/loli_B_assets/LoliStockVid4.mov"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -19,7 +20,7 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carou
           </Parallax>
         </div>
       </ParallaxProvider>
-      <div clasName="body__content">
+      <div className="body__content">
         <h2 className="body__header">Welcome To Loli B Bakery</h2>
         <h2 className="body__text">
           <p>
@@ -49,7 +50,7 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carou
         >
           A LITTLE MORE ABOUT LOLI B BAKERY
         </button>
-        {/* <Carousel/> */}
+        {/* <Carousel carousel={carousel} /> */}
         <h2 className="body__mid-header">Our Family Recipes</h2>
         <h2 className="body__text">
           <p>Our family recipes are sacred!</p>{" "}
@@ -81,14 +82,14 @@ function Body({ handleAboutClick, handleShopClick, handleAlexClick, items, Carou
         >
           SHOP OUR DELICIOUS TREATS!
         </button>
-        <Cards items={items} />
-        <button
+        <Cards items={items} handleShopClick={handleShopClick} />
+        {/* <button
           className="body__alex-btn"
           type="button"
           onClick={handleAlexClick}
         >
           Alex's World
-        </button>
+        </button> */}
       </div>
     </section>
   );

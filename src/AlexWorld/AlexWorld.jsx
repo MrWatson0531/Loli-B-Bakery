@@ -7,7 +7,7 @@ function AlexWorld ({}){
         <section className="alex">
             <ul className="alex__blog-list">
                 <div className="alex__img-block">
-                    
+                    <img src="../Assets" alt="jumping pic" className="alex__blog-img" />
                     <p className="alex__blog-title">A</p>
                 </div>
                 <div className="alex__img-block">

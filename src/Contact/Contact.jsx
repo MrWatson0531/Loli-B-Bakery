@@ -30,7 +30,7 @@ function Contact({ handleFormSubmit }) {
           placeholder="Last Name"
           id={"lastName"}
         />
-        <div className="contact__input-border"></div>
+        <div className="contact__input-border">
       </div>
       <label htmlFor="Email" className="contact__label">
         Email{""}
@@ -41,12 +41,12 @@ function Contact({ handleFormSubmit }) {
         placeholder="Email Address"
         id={"Email"}
       />
-      <div className="contact__input-border"></div>
       <label htmlFor="Message" className="contact__label">
         Message{""}
       </label>
       <input type="text" className="contact__message" id={"Message"} />
-      <button className="contact__submit" type="submit">
+      </div>
+      <button className="contact__submit" type="submit" onClick={handleFormSubmit}>
         SUBMIT
       </button>
     </section>

@@ -1,8 +1,21 @@
-.contact{}
+.contact{
+    display: flex;
+    flex-direction: column;
+    width: 100%;                                                                                      ;
+}
 
 .contact__text{}
 
 .contact__submit{
     background-color: rgb(48, 42, 104);
-    font-family: Blueberry;
+    color: white;
+    font-weight: 100;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.contact__input-border{
+    display: flex;
+    flex-direction: column;
 }

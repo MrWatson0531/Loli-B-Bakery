@@ -2,18 +2,17 @@ import React from "react";
 import "../Cards/Cards.css";
 import ItemCard from "../ItemCard/ItemCard";
 import { useContext } from "react";
-import  {itemOptions} from "../utils/constants";
+import { itemOptions } from "../utils/contexts/constants";
 
-function Cards({ handleShopClick, item }) {
-  const priceContext = useContext("$");                     
-  
+function Cards({ handleShopClick }) {
+  const priceContext = useContext("$");
 
   return (
     <section className="cards">
       <ul className="cards__list">
         {itemOptions
           .filter((item) => {
-            if (item.price === "$"){
+            if (item.price === "$$$") {
               return item;
             }
           })
