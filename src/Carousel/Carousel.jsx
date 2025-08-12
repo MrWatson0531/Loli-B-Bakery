@@ -1,71 +1,83 @@
 import React from "react";
 import Slider from "react-slick";
+
+import { useState, useRef, useEffect } from "react";
+
 import "../Carousel/carousel.css";
+import image1 from "../Assets/images/Snacks_1.jpg";
+import image2 from "../Assets/images/Snacks_2.jpg";
+import image3 from "../Assets/images/Snacks_3.jpg";
+import image4 from "../Assets/images/Snacks_4.jpg";
+import image5 from "../Assets/images/Snacks_5.jpg";
+import image6 from "../Assets/images/Snacks_6.jpg";
+//import "slick-carousel/slick/slick.css";
+//import "slick-carousel/slick/slick-theme.css";
+
+// function Carousel() {
+//   const [nav2, setNav2] = useState("");
+//   let sliderRef = useRef(null);
+
+//   useEffect(() => {
+//     setNav2(sliderRef);
+//   }, []);
+//   return (
+//     <div className="slider-container">
+//       <Slider asNavFor={nav2} ref={(slider) => (sliderRef = slider)}>
+//         <div>
+//           <img src={image1} />
+//         </div>
+//         <div>
+//           <img src={image2} />
+//         </div>
+//         <div>
+//           <img src={image3} />
+//         </div>
+//         <div>
+//           <img src={image4} />
+//         </div>
+//         <div>
+//           <img src={image5} />
+//         </div>
+//         <div>
+//           <img src={image6} />
+//         </div>
+//       </Slider>
+//     </div>
+//   );
+// }
 
 function Carousel() {
-  const [nav1, setNav1] = useState(null);
-  const [nav2, setNav2] = useState(null);
-  let sliderRef1 = useRef(null);
-  let sliderRef2 = useRef(null);
-
-  useEffect(() => {
-    setNav1(sliderRef1);
-    setNav2(sliderRef2);
-  }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <div className="slider-container">
-      <h2>Slider Syncing (Carousel)</h2>
-      <h4>First Slider</h4>
-      <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+      <Slider {...settings}>
         <div>
-          <image src="">1</image>
+          <img src={image1} alt="" />
         </div>
         <div>
-          <image>2</image>
+          <img src={image2} alt="" />
         </div>
         <div>
-          <image>3</image>
+          <img src={image3} alt="" />
         </div>
         <div>
-          <image>4</image>
+          <img src={image4} alt="" />
         </div>
         <div>
-          <image>5</image>
+          <img src={image5} alt="" />
         </div>
         <div>
-          <image>6</image>
-        </div>
-      </Slider>
-      <h4>Second Slider</h4>
-      <Slider
-        asNavFor={nav1}
-        ref={slider => (sliderRef2 = slider)}
-        slidesToShow={3}
-        swipeToSlide={true}
-        focusOnSelect={true}
-      >
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
+          <img src={image6} alt="" />
         </div>
       </Slider>
     </div>
   );
-}
 }
 
 export default Carousel;

@@ -1,10 +1,12 @@
 import "../Cart/CartModal.css";
-import { itemOptions } from "../utils/contexts/constants";
-import { CurrentCardContext } from "../utils/contexts/CurrentCardContext";
+import { itemOptions } from "../utils/constants";
+// import { CurrentCartContext } from "../utils/contexts/CurentCartContext";
 
-function Cart({ isOpen, cart, setCart, handleCloseClick }) {
+
+function Cart({ isOpen, handleCloseClick }) {
   // need to access cart array here
   // need to be able to update cart array (to delete items)
+  // const cartContext  = useContext(CurrentCartContext);
 
   return (
     <section className={`cart ${isOpen ? "cart_opened" : ""}`}>

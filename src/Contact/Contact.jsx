@@ -9,7 +9,7 @@ function Contact({ handleFormSubmit }) {
       <p className="contact__text">
         If you have questions or want a custom order for a special occasion, or
         want to try a sample box don’t hesitate to contact us!
-      </p>
+      </p><form>
       <div className="contact__name-fields">
         <label htmlFor="firstName" className="contact__label">
           firstName{""}
@@ -44,13 +44,15 @@ function Contact({ handleFormSubmit }) {
       <label htmlFor="Message" className="contact__label">
         Message{""}
       </label>
-      <input type="text" className="contact__message" id={"Message"} />
+      <textarea className="contact__textarea" id={"Message"} placeholder="Tell us what you'd like to order, any special requests, or questions you have."
+></textarea>
       </div>
       <button className="contact__submit" type="submit" onClick={handleFormSubmit}>
         SUBMIT
       </button>
+      </form>
     </section>
-  );
+  )
 }
 
 export default Contact;

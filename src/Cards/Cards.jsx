@@ -2,17 +2,19 @@ import React from "react";
 import "../Cards/Cards.css";
 import ItemCard from "../ItemCard/ItemCard";
 import { useContext } from "react";
-import { itemOptions } from "../utils/contexts/constants";
+import { itemOptions } from "../utils/constants";
 
-function Cards({ handleShopClick }) {
-  const priceContext = useContext("$");
+function Cards( {handleItemClick} ) {
+  // const priceContext = useContext("");
+  console.log("123");
+  // console.log(priceContext);
 
   return (
     <section className="cards">
-      <ul className="cards__list">
+      <ul className="cards__list" key="cards_list">
         {itemOptions
           .filter((item) => {
-            if (item.price === "$$$") {
+            if (item.price === "$15.00") {
               return item;
             }
           })
@@ -24,7 +26,7 @@ function Cards({ handleShopClick }) {
               <ItemCard
                 key={item._id}
                 item={item}
-                handleCardClick={handleShopClick}
+                handleItemClick={handleItemClick}
               />
             );
           })}

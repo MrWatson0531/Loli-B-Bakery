@@ -1,5 +1,6 @@
 .cards {
   margin: 0;
+  display: flex;
 }
 
 .card__image {
@@ -25,4 +26,14 @@
   flex-direction: row;
   overflow: hidden;
   justify-content: space-evenly;
+}
+
+.card__info{
+  
+}
+
+@media screen and (max-width: 320px){
+ .cards__list {
+  flex-direction: column;
+ } 
 }

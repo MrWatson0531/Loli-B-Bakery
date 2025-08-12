@@ -29,4 +29,4 @@ function getCart() {
   }).then(checkResponse);
 }
 
-export {deleteItem, addItem, getItems, getCart}
+export {deleteItem, addItem, getItems, getCart, checkResponse}

@@ -2,9 +2,10 @@ import React from "react";
 import Cards from "../Cards/Cards";
 import "../Body/Body.css";
 import { ParallaxProvider, Parallax } from "react-scroll-parallax";
-// import Carousel from "../Carousel/carousel";
+import Carousel from "../Carousel/Carousel";
+import { Link } from "react-router-dom";
 
-function Body({ handleAboutClick, handleShopClick, items, carousel }) {
+function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
   return (
     <section className="body">
       <ParallaxProvider>
@@ -12,7 +13,7 @@ function Body({ handleAboutClick, handleShopClick, items, carousel }) {
           <Parallax speed={-80}>
             <video autoPlay loop muted className="background__video">
               <source
-                src="src/assets/loli_B_assets/LoliStockVid4.mov"
+                src="src/assets/images/LoliStockVid4.mov"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -42,15 +43,15 @@ function Body({ handleAboutClick, handleShopClick, items, carousel }) {
             ready to share a piece of our heart with the world.
           </p>
         </h2>
-        <button
+        <Link
           className="body__mid-btn"
           onClick={handleAboutClick}
-          type="button"
+          to="/About"
           id="body__shop-mid-btn"
         >
           A LITTLE MORE ABOUT LOLI B BAKERY
-        </button>
-        {/* <Carousel carousel={carousel} /> */}
+        </Link>
+        {/* <Carousel items={items}> </Carousel> */}
         <h2 className="body__mid-header">Our Family Recipes</h2>
         <h2 className="body__text">
           <p>Our family recipes are sacred!</p>{" "}
@@ -74,15 +75,16 @@ function Body({ handleAboutClick, handleShopClick, items, carousel }) {
             special as our grandmother does when she receives a care package.
           </p>
         </h2>
-        <button
+        <Link
           className="body__btn"
           type="button"
           id="body__shop-btn"
           onClick={handleShopClick}
+          to="/Shop"
         >
           SHOP OUR DELICIOUS TREATS!
-        </button>
-        <Cards items={items} handleShopClick={handleShopClick} />
+        </Link>
+        <Cards items={items} handleItemClick={handleItemClick} />
         {/* <button
           className="body__alex-btn"
           type="button"

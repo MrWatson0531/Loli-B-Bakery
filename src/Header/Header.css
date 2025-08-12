@@ -1,26 +1,26 @@
 @font-face {
   font-family: Lumanosimo;
-  src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
+  src: url(../../src/vendor/Fonts/Lumanosimo-Regular.ttf);
 }
 @font-face {
   font-family: Blueberry;
-  src: url(../assets/Fonts/Blueberry-Cream.ttf);
+  src: url(../vendor/Fonts/Blueberry-Cream.ttf);
 }
 @font-face {
   font-family: Delicate;
-  src: url(../assets/Fonts/DelicateCaligraphy.ttf);
+  src: url(../vendor/Fonts/DelicateCaligraphy.ttf);
 }
 @font-face {
   font-family: Second;
-  src: url(../assets/Fonts/SecondChild.ttf);
+  src: url(../vendor/Fonts/SecondChild.ttf);
 }
 @font-face {
   font-family: Caviar;
-  src: url(../assets/Fonts/CaviarDreams.ttf);
+  src: url(../vendor/Fonts/CaviarDreams.ttf);
 }
 @font-face {
   font-family: Angeline;
-  src: url(../Assets/Fonts/AngelineVintage.ttf);
+  src: url(../vendor/Fonts/AngelineVintage.ttf);
 }
 
 .header {
@@ -92,7 +92,7 @@
   align-items: center;
   flex-direction: row;
   height: 180px;
-  width: 1620px;
+  width: 100%;
   margin: 0;
   flex-wrap: wrap;
   justify-content: center;
@@ -103,8 +103,22 @@
   height: 75px;
   width: 75px;
   border: none;
-  background: url(../../src/Assets/loli_B_assets/ShoppingCart.jpg) transparent
+  background: url(../../src/Assets/images/ShoppingCart.jpg) transparent
     center no-repeat;
   object-fit: cover;
   background-size: contain;
+  cursor:pointer;
+}
+
+.header__signup{
+  border: 0;
+  background-color: white;
+  font-family: "Caviar";
+  cursor: pointer;
+  color: grey;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 320px){
+  
 }
