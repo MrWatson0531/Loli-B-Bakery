@@ -42,8 +42,8 @@ function App() {
     _id: "",
   });
 
-  const handleAddToCart = (items) => {
-    addItem().then((res) => {
+  const handleAddToCart = (bakeryItem) => {
+    addItem(bakeryItem).then((res) => {
       const updatedItems = items.filter((item) => {
         return item._id === item._id;
       });

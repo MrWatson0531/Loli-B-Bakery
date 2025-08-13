@@ -27,7 +27,7 @@ function ItemModal({
             <h2 className="itemModal__price">{selectedItem?.price}</h2>
             <button
               className="itemModal__button"
-              onClick={handleAddToCart}
+              onClick={() => handleAddToCart(item)}
               type="button"
             >
               Add to Cart
