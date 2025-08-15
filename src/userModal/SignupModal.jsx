@@ -90,7 +90,7 @@ const SignupModal = ({
           className="addModal__btn"
           onClick={handleLoginClick}
         >
-          or Login
+           or Login 
         </button>
       </div>
     </ModalWithForm>
