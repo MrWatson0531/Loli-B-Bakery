@@ -43,16 +43,20 @@ function App() {
   });
 
   const handleAddToCart = (bakeryItem) => {
-    addItem(bakeryItem).then((res) => {
-      const updatedItems = items.filter((item) => {
-        return item._id === item._id;
-      });
+  addItem(bakeryItem._id) 
+    .then((res) => {
+      console.log("item added", res.data)
+      // If the backend returns the updated user/cart, you can update state here
+      setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
+    })
+    .catch((err) => {
+      console.error("Error adding to cart:", err);
     });
-  };
+};
 
   const handleCartClick = () => {
     setActiveModal("cart");
-  };
+  };  
 
   const handleShopClick = (item) => {};
 
@@ -108,13 +112,11 @@ function App() {
         localStorage.setItem("jwt", res.token);
         //set logged in function here
         checkToken(res.token).then((res) => {
-          // get the urer info
           setIsLoggedIn(true);
           setCurrentUser(res);
         });
-        //close all modals here
+        
         closeActiveModal();
-        //fetch user info here and pass response token as an argument
       })
       .catch(console.error);
   };
@@ -131,6 +133,7 @@ function App() {
         handleLogin({ email, password });
       })
       .catch(console.error);
+      closeActiveModal();
   };
 
   const handleItemLike = ({ id, isLiked }) => {
@@ -182,7 +185,7 @@ function App() {
 
   return (
     <div className="page">
-      <CurrentCardContext.Provider value={{ cart, setCart }}>
+      <CurrentCardContext.Provider value={{ cart, setCart, selectedItem }}>
         <UserContext.Provider value={{ isLoggedIn, currentUser }}>
           <div className="page__content">
             <Header
@@ -265,13 +268,13 @@ function App() {
               handleAddToCart={handleAddToCart}
             ></ItemModal>
             <SignupModal
-              handleCloseClick={handleCloseClick}
+              onClick={handleCloseClick}
               isOpen={activeModal === "signup"}
               onSubmit={handleSignup}
               handleLoginClick={handleLoginClick}
             />
             <LoginModal
-              handleCloseClick={handleCloseClick}
+              onClick={handleCloseClick}
               isOpen={activeModal === "login"}
               onSubmit={handleLogin}
               handleSignupClick={handleSignupClick}

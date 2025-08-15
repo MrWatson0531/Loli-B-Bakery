@@ -20,7 +20,7 @@
 .modal__close {
   background-image: url("../Assets/images/close-icon.jpg");
   position: absolute;
-  background-color: transparent;
+  background: transparent;
   width: 25px;
   height: 25px;
   background-repeat: no-repeat;

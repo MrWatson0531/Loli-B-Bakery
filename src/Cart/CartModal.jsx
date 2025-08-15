@@ -16,7 +16,9 @@ function Cart({ isOpen, handleCloseClick }) {
           type="button"
           onClick={handleCloseClick}
         ></button>
+        <div>
         <h2 className="cart__modal-heading">Your Shopping Cart</h2>
+        </div>
         <ul className="cart__items">
           <li className="cart__item">
             <img
@@ -26,6 +28,7 @@ function Cart({ isOpen, handleCloseClick }) {
             />
             <p className="cart__item">{itemOptions.name}</p>
             <p className="cart__item-price">{itemOptions.price}</p>
+            <button className="cart__remove-item"> remove </button>
           </li>
         </ul>
         <button className="cart__modal-confirm" type="submit">

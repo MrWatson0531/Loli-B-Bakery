@@ -6,6 +6,7 @@ const SignupModal = ({
   isOpen,
   onSubmit,
   handleLoginClick,
+  handleSignup
 }) => {
   const [name, setName] = useState("");;
   const [email, setEmail] = useState("");
@@ -32,7 +33,11 @@ const SignupModal = ({
       modalContentMod={"modal__content"}
       onSubmit={handleSubmit}
       handleLoginClick={handleLoginClick}
-    >
+    ><button
+          className="signup__close"
+          type="button"
+          onClick={handleCloseClick}
+        ></button>
       <label className="addModal__label" htmlFor="signup__email">
         Email *{""}
       </label>
@@ -77,7 +82,7 @@ const SignupModal = ({
       <div className="modal__input-border"></div>
 
       <div className="modal__btn-block">
-        <button type="submit" className="modal__btn">
+        <button type="submit" className="modal__btn" onSubmit={handleSignup}>
           Sign up
         </button>
         <button

@@ -6,6 +6,7 @@ const LoginModal = ({
   isOpen,
   onSubmit,
   handleSignupClick,
+  handleLogin
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +24,7 @@ const LoginModal = ({
   return (
     <ModalWithForm
       isOpen={isOpen}
-      closeActiveModal={handleCloseClick}
+      onClick={handleCloseClick}
       buttontext="Log in"
       title="User Login"
       className="addModal"
@@ -63,7 +64,7 @@ const LoginModal = ({
       </div>
       <div className="modal__input-border"></div>
       <div className="modal__btn-block">
-        <button type="submit" className="modal__btn">
+        <button type="submit" className="modal__btn" onSubmit={handleLogin}>
           Log in
         </button>
         <button

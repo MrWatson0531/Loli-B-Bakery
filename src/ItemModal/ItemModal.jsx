@@ -9,9 +9,6 @@ function ItemModal({
   handleAddToCart,
   selectedItem,
 }) {
-  const item = useContext(CurrentCardContext);
-  console.log(item);
-
   return (
     <section className={`itemModal ${isOpen ? "itemModal_opened" : ""}`}>
       <div className="itemModal__surface">
@@ -27,7 +24,7 @@ function ItemModal({
             <h2 className="itemModal__price">{selectedItem?.price}</h2>
             <button
               className="itemModal__button"
-              onClick={() => handleAddToCart(item)}
+              onClick={() => handleAddToCart(selectedItem)}
               type="button"
             >
               Add to Cart

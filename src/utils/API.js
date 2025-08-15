@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -10,12 +10,12 @@ function deleteItem(id) {
   }).then(checkResponse);
 }
 
-function addItem(bakeryItem) {
-  localStorage.setItem("cartItem", JSON.stringify(bakeryItem));
+function addItem(itemId) {
+  localStorage.setItem("cartItem", JSON.stringify(itemId));
   return fetch(`${baseUrl}/cart`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body:JSON.stringify(bakeryItem), 
+    body: JSON.stringify({ itemId }),
   }).then(checkResponse);
 }
 
@@ -31,4 +31,4 @@ function getCart() {
   }).then(checkResponse);
 }
 
-export {deleteItem, addItem, getItems, getCart, checkResponse}
+export { deleteItem, addItem, getItems, getCart, checkResponse };
