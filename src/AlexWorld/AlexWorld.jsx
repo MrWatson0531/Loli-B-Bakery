@@ -2,7 +2,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "../AlexWorld/AlexWorld.css";
 
-function AlexWorld({}) {
+function AlexWorld( {} ) {
   return (
     <section className="alex">
       <ul className="alex__blog-list">

@@ -1,7 +1,7 @@
 const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  return res.ok ? res.json() : Promise.reject(`Error:  ${res.status}`);
 }
 
 function deleteItem(id) {

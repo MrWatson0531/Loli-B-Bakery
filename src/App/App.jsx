@@ -213,7 +213,7 @@ function App() {
                     handleItemClick={handleItemClick}
                   />
                 }
-                items={items}
+                items={ items }
               />
 
               <Route

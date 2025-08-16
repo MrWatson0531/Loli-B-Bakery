@@ -22,7 +22,7 @@ function ModalWithForm({
           <button
             className="modal__close"
             type="button"
-            onClick={onClick}
+            onClick={ onClick }
           ></button>
         </form>
         </div>

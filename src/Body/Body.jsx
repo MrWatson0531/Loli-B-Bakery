@@ -79,7 +79,7 @@ function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
           className="body__btn"
           type="button"
           id="body__shop-btn"
-          onClick={handleShopClick}
+          onClick={ handleShopClick }
           to="/Shop"
         >
           SHOP OUR DELICIOUS TREATS!

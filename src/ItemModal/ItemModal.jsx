@@ -21,7 +21,7 @@ function ItemModal({
         <div className="itemModal__footer">
           <div className="itemModal__info-block">
             <h2 className="itemModal__label">{selectedItem?.name}</h2>
-            <h2 className="itemModal__price">{selectedItem?.price}</h2>
+            <h2 className="itemModal__price">{ selectedItem?.price }</h2>
             <button
               className="itemModal__button"
               onClick={() => handleAddToCart(selectedItem)}

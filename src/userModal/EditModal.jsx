@@ -27,7 +27,7 @@ const EditModal = ({ handleCloseClick, isOpen, onSubmit }) => {
       title="Change profile data"
       className="addModal"
       modalContentMod={"addModal__content"}
-      onSubmit={handleSubmit}
+      onSubmit={ handleSubmit }
     >
       <label className="modal__label" htmlFor="name">
         name *{""}

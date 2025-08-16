@@ -7,7 +7,7 @@ function Footer({ handleSocialClick, handleTermsClick, handlePrivacyClick }) {
       <img src="" alt="Instagram" className="footer__social" />
       <div className="footer__legal-section">
         <p className="footer__legal">TERMS & CONDITIONS</p>
-       <div> <p className="footer__legal">PRIVACY POLICY</p> </div>
+       <div> <p className="footer__legal">PRIVACY POLICY</p></div>
       </div>
       <p className="footer__signature">
         Website Design and Build by VMW Digital Solutions ltd.

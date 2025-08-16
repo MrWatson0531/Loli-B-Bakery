@@ -88,7 +88,7 @@ const SignupModal = ({
         <button
           type="button"
           className="addModal__btn"
-          onClick={handleLoginClick}
+          onClick={ handleLoginClick }
         >
            or Login 
         </button>

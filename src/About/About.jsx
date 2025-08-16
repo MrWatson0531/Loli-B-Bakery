@@ -57,7 +57,7 @@ function About({ handleShopClick, handleHomeClick }) {
             </p>
           </div>
         </div>
-        <img src={Social} alt="social image" className="about__img-2" />
+        <img src={ Social } alt="social image" className="about__img-2" />
       </div>
     </section>
   );

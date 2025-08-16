@@ -14,7 +14,7 @@ function Cart({ isOpen, handleCloseClick }) {
         <button
           className="cart__modal-close"
           type="button"
-          onClick={handleCloseClick}
+          onClick={ handleCloseClick }
         ></button>
         <div>
         <h2 className="cart__modal-heading">Your Shopping Cart</h2>

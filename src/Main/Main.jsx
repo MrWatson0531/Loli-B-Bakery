@@ -8,7 +8,7 @@ function Main({handleAboutClick, handleShopClick, handleAlexClick, carousel, han
         handleShopClick={handleShopClick}
         handleAlexClick={handleAlexClick}
         handleItemClick={handleItemClick}
-        carousel={carousel}
+        carousel={ carousel }
       />
     </section>
   );

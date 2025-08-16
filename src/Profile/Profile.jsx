@@ -14,7 +14,7 @@ function Profile({
       <section className="profile__clothesSection">
         <Cards
           handleItemClick={handleItemClick}
-          items={items}
+          items={ items }
           handleAddClick={handleAddClick}
           handleLike={handleLike}
         />

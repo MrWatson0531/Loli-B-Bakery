@@ -29,7 +29,7 @@ const LoginModal = ({
       title="User Login"
       className="addModal"
       modalContentMod={"modal__content"}
-      onSubmit={handleSubmit}
+      onSubmit={ handleSubmit }
     >
       <div className="modal__input-block">
         <label className="modal__label" htmlFor="email">

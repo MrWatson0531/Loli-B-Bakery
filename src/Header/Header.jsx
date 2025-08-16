@@ -53,7 +53,7 @@ function Header({
               src={Logo}
               alt="Loli B Logo"
               className="header__logo"
-              onClick={handleHomeClick}
+              onClick={ handleHomeClick }
             />
           </Link>
           <ul className="header__nav-links">

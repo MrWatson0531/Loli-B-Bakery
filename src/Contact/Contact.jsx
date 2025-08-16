@@ -47,7 +47,7 @@ function Contact({ handleFormSubmit }) {
       <textarea className="contact__textarea" id={"Message"} placeholder="Tell us what you'd like to order, any special requests, or questions you have."
 ></textarea>
       </div>
-      <button className="contact__submit" type="submit" onClick={handleFormSubmit}>
+      <button className="contact__submit" type="submit" onClick={ handleFormSubmit }>
         SUBMIT
       </button>
       </form>

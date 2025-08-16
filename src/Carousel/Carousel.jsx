@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 
-import { useState, useRef, useEffect } from "react";
+import {useState, useRef, useEffect} from "react";
 
 import "../Carousel/carousel.css";
 import image1 from "../Assets/images/Snacks_1.jpg";
@@ -46,7 +46,7 @@ import image6 from "../Assets/images/Snacks_6.jpg";
 //   );
 // }
 
-function Carousel() {
+function Carousel( ) {
   const settings = {
     dots: true,
     infinite: true,

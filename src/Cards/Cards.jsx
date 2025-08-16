@@ -26,7 +26,7 @@ function Cards( {handleItemClick} ) {
               <ItemCard
                 key={item._id}
                 item={item}
-                handleItemClick={handleItemClick}
+                handleItemClick={ handleItemClick }
               />
             );
           })}
