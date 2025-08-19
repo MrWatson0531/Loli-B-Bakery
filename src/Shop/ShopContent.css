@@ -1,0 +1,34 @@
+.shop{
+}
+
+.shop__content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.shop__main{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 50px 20px 50px;
+}
+
+.shop__type-button{
+    display: flex;
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+}
+
+.shop__surface{
+    width: 100%;
+    height: 100%;
+}
+
+.shop__cards{
+    display: flex;
+    flex-wrap: wrap;
+}

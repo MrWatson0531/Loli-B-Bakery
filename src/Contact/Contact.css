@@ -1,0 +1,96 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  background-color: #ffffff; /* Matches the rest of your site */
+  color: #302a68; /* Deep purple for text */
+}
+
+.contact__header {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #302a68; /* Title in your brand purple */
+  text-align: center;
+}
+
+.contact__text {
+  font-size: 1rem;
+  text-align: center;
+  max-width: 500px;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  gap: 1.5rem;
+}
+
+.contact__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #302a68;
+}
+
+.contact__input,
+.contact__textarea {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  color: #333;
+}
+
+.contact__input:focus,
+.contact__textarea:focus {
+  border-color: #302a68;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(48, 42, 104, 0.2);
+}
+
+.contact__textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact__submit {
+  background-color: rgb(48, 42, 104); /* Your deep purple */
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact__submit:hover {
+  background-color: rgb(66, 58, 140); /* Slightly lighter purple on hover */
+}
+
+
+.contact__submit{
+    background-color: rgb(48, 42, 104);
+    color: white;
+    font-weight: 100;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.contact__input-border{
+    display: flex;
+    flex-direction: column;
+}

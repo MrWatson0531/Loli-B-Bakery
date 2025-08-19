@@ -1,20 +1,112 @@
 @font-face {
-    font-family: Blueberry;
-    src: url(../assets/Fonts/Blueberry-Cream.ttf);
+  font-family: Lumanosimo;
+  src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
+}
+@font-face {
+  font-family: Blueberry;
+  src: url(../assets/Fonts/Blueberry-Cream.ttf);
+}
+@font-face {
+  font-family: Delicate;
+  src: url(../assets/Fonts/DelicateCaligraphy.ttf);
+}
+@font-face {
+  font-family: Second;
+  src: url(../assets/Fonts/SecondChild.ttf);
+}
+@font-face {
+  font-family: Sweet;
+  src: url(../Assets/Fonts/Sweetgentle.ttf);
+}
+@font-face {
+  font-family: Angeline;
+  src: url(../Assets/Fonts/AngelineVintage.ttf);
 }
 
-.body{
+.body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.body__content {
+  justify-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.body__parallax {
+  background: url(src/assets/loli_B_assets/LoliStockVid2.mp4) fixed center
+    no-repeat cover;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.body__header {
+  display: flex;
+  font-family: "Angeline";
+  font-size: 45px;
+  color: rgb(48, 42, 104);
+  justify-content: center;
+  font-size: 100px;
+}
+
+.body__mid-header {
+  color: rgb(48, 42, 104);
+  font-family: "Angeline";
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.body__text {
+  font-family: "Caviar";
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.body__mid-btn{
+  border-style: none;
+    height: 60px;
+    width: 445px;
+    background-color: rgb(48, 42, 104);
+    color:white;
+    font-size: 18px;
     display: flex;
-    width: 100%;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 50px;
+    border-radius: 5%;
+    padding: 0;
+    text-decoration: none;
 }
 
-.body__header{
-    font-family: Blueberry;
-    font-size: 45px;
-    color: darkslateblue;
+.body__btn {
+  border-style: none;
+    height: 55px;
+    width: 290px;
+    background-color: rgb(48, 42, 104);
+    color:white;
+    font-size: 18px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    border-radius: 5%;
+    text-decoration: none;
 }
 
-.body__text{
-
+@media screen and (max-width: 320px){
+ .body__paralax{visibility: hidden;} 
 }

@@ -1,0 +1,31 @@
+.alex{
+    display:flex;
+    width:100%;
+}
+
+.alex__blog-list{
+    width:100%;
+    display:flex;
+    height: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.alex__image-block{
+    display:flex;
+    width: 375px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.alex__blog-img{
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.alex__blog-title{
+    font-family: "Angeline";
+    font-size: 50px;
+    color: rgb(48, 42, 104);
+}

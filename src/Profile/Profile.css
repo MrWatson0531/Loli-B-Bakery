@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Cabinet-Grotesk-med;
+    src: url(../../vendor/fonts/CabinetGrotesk-Medium.woff);
+}
+
+.profile{
+    display: flex;
+    max-width: 1360px;
+    font-family: Cabinet-Grotesk-med;
+}
+
+.profileSection{
+    display:flex;
+    width: 100%;
+}
+
+.profile__clothesSection{
+}
+
+.profile__sidebar{
+}

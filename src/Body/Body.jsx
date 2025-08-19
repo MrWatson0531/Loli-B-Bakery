@@ -1,49 +1,98 @@
+import React from "react";
+import Cards from "../Cards/Cards";
 import "../Body/Body.css";
+import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import Carousel from "../Carousel/Carousel";
+import { Link } from "react-router-dom";
 
-function Body({ handleAboutClick, handleShopClick }) {
+function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
   return (
     <section className="body">
-      <h2 className="body__header">Welcome To Loli B Bakery</h2>
-      <h2 className="body__text">
-        Our treats are near and dear to my heart, each dessert is made like you
-        are coming over for dessert with the fam! Our treats have a story,
-        whether the recipe was thought up years ago or developed recently there
-        is so much love and passion behind each one. Loli B wants the feel of an
-        old school bakery (you know the one that would open on the weekends and
-        you had to arrive at a certain time otherwise all the good stuff was
-        gone). Here we never run out, we are always (unless on vacation) open
-        and ready to share a piece of our heart with the world.
-      </h2>
-      <button
-        className="body__about-btn"
-        onClick={handleAboutClick}
-        type="button"
-      >
-        A LITTLE MORE ABOUT LOLI B BAKERY
-      </button>
-      <div className="body__card-scroll"></div>
-      <h2 className="body-mid-header">Our Family Recipes</h2>
-      <h2 className="body__text">
-        Our family recipes are sacred! Growing up my sister and I would spend
-        the holiday’s helping my mother bake treats for family and friends.
-        Honestly we just wanted to eat the cookie dough, every year I looked
-        forward to that special time with my mother and sister. I craved the
-        compliments and the leftover cookies! I realized over time my passion
-        was always found in the kitchen. When I am stressed, happy, sad, or want
-        to make someone I love feel special, I can always be found heating the
-        oven up. Why are we ready to share these treats now? Loli B wants to
-        spread happiness to the world and we want your loved ones to feel as
-        special as our grandmother does when she receives a care package.
-      </h2>
-      <button
-        className="body__shop-btn"
-        type="button"
-        onClick={handleShopClick}
-      >
-        SHOP OUR DELICIOUS TREATS!
-      </button>
-      <ul className="body__card-set"></ul>
-      <h2 className="body__header-mid">Enter Alex's World</h2>
+      <ParallaxProvider>
+        <div className="body__parallax">
+          <Parallax speed={-80}>
+            <video autoPlay loop muted className="background__video">
+              <source
+                src="src/assets/images/LoliStockVid4.mov"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </Parallax>
+        </div>
+      </ParallaxProvider>
+      <div className="body__content">
+        <h2 className="body__header">Welcome To Loli B Bakery</h2>
+        <h2 className="body__text">
+          <p>
+            Our treats are near and dear to my heart, each dessert is made like
+            you are coming over for dessert with the fam!
+          </p>
+          <p>
+            Our treats have a story,whether the recipe was thought up years ago
+            or developed recently there is so much love and passion behind each
+            one.
+          </p>
+          <p>
+            Loli B wants the feel of an old school bakery (you know the one that
+            would open on the weekends and you had to arrive at a certain time
+            otherwise all the good stuff was gone).
+          </p>
+          <p>
+            Here we never run out, we are always (unless on vacation) open and
+            ready to share a piece of our heart with the world.
+          </p>
+        </h2>
+        <Link
+          className="body__mid-btn"
+          onClick={handleAboutClick}
+          to="/About"
+          id="body__shop-mid-btn"
+        >
+          A LITTLE MORE ABOUT LOLI B BAKERY
+        </Link>
+        {/* <Carousel items={items}> </Carousel> */}
+        <h2 className="body__mid-header">Our Family Recipes</h2>
+        <h2 className="body__text">
+          <p>Our family recipes are sacred!</p>{" "}
+          <p>
+            Growing up my sister and I would spend the holiday’s helping my
+            mother bake treats for family and friends.
+          </p>
+          <p>
+            Honestly, we just wanted to eat the cookie dough. Every year I
+            looked forward to that special time with my mother and sister and I
+            craved the compliments and the leftover cookies!
+          </p>{" "}
+          <p>
+            I realized over time my passion was always found in the kitchen.
+            When I am stressed, happy, sad, or want to make someone I love feel
+            special, I can always be found heating the oven up.
+          </p>{" "}
+          <p>
+            Why are we ready to share these treats now? Loli B wants to spread
+            happiness to the world and we want your loved ones to feel as
+            special as our grandmother does when she receives a care package.
+          </p>
+        </h2>
+        <Link
+          className="body__btn"
+          type="button"
+          id="body__shop-btn"
+          onClick={ handleShopClick }
+          to="/Shop"
+        >
+          SHOP OUR DELICIOUS TREATS!
+        </Link>
+        <Cards items={items} handleItemClick={handleItemClick} />
+        {/* <button
+          className="body__alex-btn"
+          type="button"
+          onClick={handleAlexClick}
+        >
+          Alex's World
+        </button> */}
+      </div>
     </section>
   );
 }

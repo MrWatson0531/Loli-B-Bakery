@@ -1,47 +1,124 @@
 @font-face {
-    font-family: Lumanosimo;
-    src: url(../../src/assets/Fonts/Lumanosimo-Regular.ttf);
+  font-family: Lumanosimo;
+  src: url(../../src/vendor/Fonts/Lumanosimo-Regular.ttf);
+}
+@font-face {
+  font-family: Blueberry;
+  src: url(../vendor/Fonts/Blueberry-Cream.ttf);
+}
+@font-face {
+  font-family: Delicate;
+  src: url(../vendor/Fonts/DelicateCaligraphy.ttf);
+}
+@font-face {
+  font-family: Second;
+  src: url(../vendor/Fonts/SecondChild.ttf);
+}
+@font-face {
+  font-family: Caviar;
+  src: url(../vendor/Fonts/CaviarDreams.ttf);
+}
+@font-face {
+  font-family: Angeline;
+  src: url(../vendor/Fonts/AngelineVintage.ttf);
 }
 
-.header{
-    display:flex;
-    height:  150px;
-    align-items:center;
-    width: 100%;
-    background-color: white;
+.header {
+  display: flex;
+  height: 225px;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  flex-direction: row;
+  z-index: 2;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.header__block{
-    display: flex;
-    flex-direction: column;
+.header__block {
+  display: flex;
+  flex-direction: column;
 }
 
-.header__nav-links{
-   display: flex;
-   list-style-type: none;
-   margin: 0;
-   padding: 0;
-   justify-content: center;
-   margin-right: 100px ;
+.header__nav-links {
+  display: flex;;
+  list-style: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  width: 700px;
+  justify-content: space-around;
 }
 
-.header__nav-link{
-    font-family: 'Lumanosimo';
+
+
+.header__nav-link {
+  font-family: "Caviar";
+  cursor: pointer;
+  color: grey;
+  font-size: 25px;
+  justify-content: center;
+  text-decoration: none;
 }
 
-.header__logo{
-    height: 150px;
+.header__nav-link:hover {
+  color: rgb(48, 42, 104);
 }
 
-.header__offer{
-    display: flex;
-    background-color:darkslateblue;
-    color: white;
-    font-family: 'Lumanosimo';
-    font-size: 15px;
-    line-height: 40px;
-    height: 40px;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
+.header__logo {
+  height: 180px;
+  display: flex;
+  right: 180px;
+}
+
+.header__offer {
+  display: flex;
+  background-color: rgb(48, 42, 104);
+  color: white;
+  font-family: "Caviar";
+  font-size: 20px;
+  line-height: 40px;
+  height: 40px;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+.header__nav-box {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  flex-direction: row;
+  height: 180px;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header__nav-cart {
+  display: flex;
+  height: 75px;
+  width: 75px;
+  border: none;
+  background: url(../../src/Assets/images/ShoppingCart.jpg) transparent
+    center no-repeat;
+  object-fit: cover;
+  background-size: contain;
+  cursor:pointer;
+}
+
+.header__signup{
+  border: 0;
+  background-color: white;
+  font-family: "Caviar";
+  cursor: pointer;
+  color: grey;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 320px){
+  
 }
