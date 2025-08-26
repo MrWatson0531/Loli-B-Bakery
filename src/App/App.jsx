@@ -17,12 +17,21 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import { carousel } from "../Carousel/carousel";
 import { Routes, Route } from "react-router-dom";
 import { itemOptions } from "../utils/constants";
-import { getItems, addItem, deleteItem, getCart } from "../utils/api";
+import { AuthContext } from "../utils/contexts/AuthContext";
+import {
+  getCart,
+  addToCart,
+  createCart,
+  removeFromCart,
+  getUser,
+} from "../utils/DummyJsonApi";
 import { CurrentCardContext } from "../utils/contexts/CurrentCardContext";
 import { UserContext } from "../utils/contexts/UserContext";
+import CartContext from "../utils/contexts/CartContext";
 import ShopContent from "../Shop/ShopContent";
-import { checkToken, signIn, signUp } from "../utils/auth"
+import { checkToken, signIn } from "../utils/auth";
 import Profile from "../Profile/Profile";
+
 // import Carousel from "../Carousel/Carousel";
 
 // const express = require("express");
@@ -39,24 +48,42 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
-    _id: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
+  //const [token, setToken] = ...
 
   const handleAddToCart = (bakeryItem) => {
-  addItem(bakeryItem._id) 
-    .then((res) => {
-      console.log("item added", res.data)
-      // If the backend returns the updated user/cart, you can update state here
-      setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
-    })
-    .catch((err) => {
-      console.error("Error adding to cart:", err);
-    });
-};
+    addItem(bakeryItem.Id)
+      .then((res) => {
+        console.log("item added", res.data);
+        // If the backend returns the updated user/cart, you can update state here
+        setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
+      })
+      .catch((err) => {
+        console.error("Error adding to cart:", err);
+      });
+    setActiveModal("");
+  };
 
   const handleCartClick = () => {
+    getCart(cart).then((res) => {
+      console.log("Cart fetched", res.data);
+      setCart(res.data.cart);
+    });
     setActiveModal("cart");
-  };  
+  };
+
+  const handleRemoveItem = (bakeryItem) => {
+    removeFromCart(bakeryItem.Id).then((res) => {
+      setCart(res.data.cart);
+    });
+  };
+
+  const handleAddItem = (bakeryItem) => {
+    AddToCart(bakeryItem).then((res) => {
+      setCart(res.data.cart);
+    });
+  };
 
   const handleShopClick = (item) => {};
 
@@ -106,25 +133,23 @@ function App() {
       .catch(console.error);
   };
 
-  const handleLogin = ({ email, password }) => {
-    signIn(email, password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        //set logged in function here
-        checkToken(res.token).then((res) => {
-          setIsLoggedIn(true);
-          setCurrentUser(res);
-        });
-        
-        closeActiveModal();
-      })
-      .catch(console.error);
+  const handleLogin = async (username, password) => {
+    try {
+      const data = await signIn(username, password);
+      setToken(data.accessToken);
+      setUser(data);
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data));
+      return data;
+      closeActiveModal();
+    } catch (err) {}
   };
 
   const handleLogOut = (user) => {
     setCurrentUser(null);
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
+    closeActiveModal();
   };
 
   const handleSignup = ({ email, password, name }) => {
@@ -133,7 +158,7 @@ function App() {
         handleLogin({ email, password });
       })
       .catch(console.error);
-      closeActiveModal();
+    closeActiveModal();
   };
 
   const handleItemLike = ({ id, isLiked }) => {
@@ -146,7 +171,7 @@ function App() {
           .addItemLike(id, token)
           .then((updatedItem) => {
             setItems((items) =>
-              items.map((item) => (item._id === id ? updatedItem : item))
+              items.map((item) => (item.Id === id ? updatedItem : item))
             );
           })
           .catch((err) => console.log(err))
@@ -156,19 +181,20 @@ function App() {
           .removeItemLike(id, token)
           .then((updatedItem) => {
             setClothingItems((items) =>
-              items.map((item) => (item._id === id ? updatedItem : item))
+              items.map((item) => (item.Id === id ? updatedItem : item))
             );
           })
           .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    getItems()
-      .then((itemOptions) => {
-        setItems(itemOptions);
-      })
-      .catch(console.error);
-  }, []);
+  // on page load fetch to get all the bakers items so that we can display them on the frontend
+  // useEffect(() => {
+  //   getItems()
+  //     .then((itemOptions) => {
+  //       setItems(itemOptions);
+  //     })
+  //     .catch(console.error);
+  // }, []);
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
@@ -185,108 +211,108 @@ function App() {
 
   return (
     <div className="page">
-      <CurrentCardContext.Provider value={{ cart, setCart, selectedItem }}>
-        <UserContext.Provider value={{ isLoggedIn, currentUser }}>
-          <div className="page__content">
-            <Header
-              handleCartClick={handleCartClick}
-              handleSignupClick={handleSignupClick}
-              handleLoginClick={handleLoginClick}
-            />
-            <Routes>
-              <Route
-                path="/About"
-                element={<About handleCartClick={handleCartClick} />}
-              />
-              <Route
-                path="/Contact"
-                element={<Contact handleCartClick={handleCartClick} />}
-              />
+      <CurrentCardContext.Provider value={{ selectedItem, setSelectedItem }}>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <UserContext.Provider value={{ isLoggedIn, currentUser }}>
+            <AuthContext.Provider
+              value={{
+                currentUser,
+                isLoading,
 
-              <Route
-                path="/Shop"
-                element={
-                  <ShopContent
-                    handleItemLike={handleItemLike}
-                    onItemLike={handleItemLike}
-                    handleCartClick={handleCartClick}
-                    handleItemClick={handleItemClick}
+                handleLogin: handleLogin,
+                handleLogOut: handleLogOut,
+              }}
+            >
+              <div className="page__content">
+                <Header
+                  handleCartClick={handleCartClick}
+                  handleSignupClick={handleSignupClick}
+                  handleLoginClick={handleLoginClick}
+                />
+                <Routes>
+                  <Route
+                    path="/About"
+                    element={<About handleCartClick={handleCartClick} />}
                   />
-                }
-                items={ items }
-              />
+                  <Route
+                    path="/Contact"
+                    element={<Contact handleCartClick={handleCartClick} />}
+                  />
 
-              <Route
-                path="/Body"
-                element={
-                  <Body
-                    handleCartClick={handleCartClick}
+                  <Route
+                    path="/Shop"
+                    element={
+                      <ShopContent
+                        handleItemLike={handleItemLike}
+                        onItemLike={handleItemLike}
+                        handleCartClick={handleCartClick}
+                        handleItemClick={handleItemClick}
+                      />
+                    }
                     items={items}
-                    handleItemClick={handleItemClick}
-                    onItemLike={handleItemLike}
                   />
-                }
-              />
-              {/* <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile
-                      handleItemClick={handleItemClick}
-                      items={items}
-                      editProfileClick={editProfileClick}
-                      logOutClick={handleLogOut}
-                      handleItemLike={handleItemLike}
-                    />
-                  </ProtectedRoute>
-                }
-              /> */}
-              <Route
-                path="/"
-                element={
-                  <Main
-                    handleItemClick={handleItemClick}
-                    items={items}
-                    onItemLike={handleItemLike}
-                    handleItemLike={handleItemLike}
+                  <Route
+                    path="/Body"
+                    element={
+                      <Body
+                        handleCartClick={handleCartClick}
+                        items={items}
+                        handleItemClick={handleItemClick}
+                        onItemLike={handleItemLike}
+                      />
+                    }
                   />
-                }
-              />
-            </Routes>
-            <Footer />
-            <CartModal
-              isOpen={activeModal === "cart"}
-              handleCloseClick={handleCloseClick}
-              cart={cart}
-              setCart={setCart}
-            ></CartModal>
-            <ItemModal
-              isOpen={activeModal === "item"}
-              handleCloseClick={handleCloseClick}
-              item={selectedItem}
-              selectedItem={selectedItem}
-              handleAddToCart={handleAddToCart}
-            ></ItemModal>
-            <SignupModal
-              onClick={handleCloseClick}
-              isOpen={activeModal === "signup"}
-              onSubmit={handleSignup}
-              handleLoginClick={handleLoginClick}
-            />
-            <LoginModal
-              onClick={handleCloseClick}
-              isOpen={activeModal === "login"}
-              onSubmit={handleLogin}
-              handleSignupClick={handleSignupClick}
-            />
-            <EditModal
-              handleCloseClick={handleCloseClick}
-              isOpen={activeModal === "edit"}
-              onSubmit={handleProfileEdit}
-            />
-            <logoutModal handleLogOutClick={handleLogOut} />
-          </div>
-        </UserContext.Provider>
+                  <Route
+                    path="/"
+                    element={
+                      <Main
+                        handleItemClick={handleItemClick}
+                        items={items}
+                        onItemLike={handleItemLike}
+                        handleItemLike={handleItemLike}
+                      />
+                    }
+                  />
+                </Routes>
+                <Footer />
+                <CartModal
+                  isOpen={activeModal === "cart"}
+                  handleCloseClick={handleCloseClick}
+                  handleRemoveItem={handleRemoveItem}
+                  cart={cart}
+                  setCart={setCart}
+                ></CartModal>
+                <ItemModal
+                  isOpen={activeModal === "item"}
+                  handleCloseClick={handleCloseClick}
+                  item={selectedItem}
+                  selectedItem={selectedItem}
+                  handleAddToCart={handleAddToCart}
+                  handleAddItem={handleAddItem}
+                  handleItemLike={handleItemLike}
+                ></ItemModal>
+                <SignupModal
+                  onClick={handleCloseClick}
+                  isOpen={activeModal === "signup"}
+                  onSubmit={handleSignup}
+                  handleLoginClick={handleLoginClick}
+                />
+                <LoginModal
+                  onClick={handleCloseClick}
+                  isOpen={activeModal === "login"}
+                  onSubmit={handleLogin}
+                  handleSignupClick={handleSignupClick}
+                />
+                <EditModal
+                  handleCloseClick={handleCloseClick}
+                  isOpen={activeModal === "edit"}
+                  onSubmit={handleProfileEdit}
+                />
+                <logoutModal handleLogoutClick={handleLogOut} />
+              </div>
+            </AuthContext.Provider>
+          </UserContext.Provider>
+        </CartContext.Provider>
       </CurrentCardContext.Provider>
     </div>
   );

@@ -5,12 +5,4 @@ const UserContext = React.createContext({
 
 });
 
-
-
-
-
-
-
-
-
 export { UserContext };

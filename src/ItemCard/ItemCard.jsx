@@ -1,22 +1,27 @@
 import "./ItemCard.css";
-import { itemOptions } from "../utils/constants";
 
-function ItemCard({ item, handleItemClick }) {
-  const filteredItems = itemOptions.filter((item) => {
-    return (
-      item.name === itemOptions.name &&
-      item.price === itemOptions.price &&
-      item.imageUrl === itemOptions.url
-    );
-  });
-
+function ItemCard({ item, handleItemClick, handleLike, handleItemLike }) {
   return (
-    <li className="card" key="card" onClick={() => handleItemClick(item)}>
-      <img src={item?.url} alt={item?.name} className="card__image" />
-      <div className="card__info">
-        <h2 className="card__price">{item?.price}</h2>
-        <h2 className="card__name">{ item?.name }</h2>
+    <li className="card" key={item._id}>
+      {/* 🔹 Clicking image or name opens details */}
+      <div onClick={() => handleItemClick(item)}>
+        <img src={item?.url} alt={item?.name} className="card__image" />
+        <div className="card__info">
+          <h2 className="card__price">{item?.price}</h2>
+          <h2 className="card__name">{item?.name}</h2>
+        </div>
       </div>
+
+      {/* 🔹 Like Button */}
+       <button
+        className={`card__like-button ${item.liked ? "liked" : ""}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleLike(item);
+        }}
+      >
+        {item.liked ? "❤️" : "🤍"}
+      </button>
     </li>
   );
 }

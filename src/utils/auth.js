@@ -1,43 +1,42 @@
-import { checkResponse } from "./api";
+function getToken() {
+  return localStorage.getItem("jwt");
+}
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://api.wtwr.smelly.cc"
-    : "http://localhost:3001";
+function checkResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+}
 
-function signUp({ name, email, password }) {
-  return fetch(`${baseUrl}/signup`, {
+const baseUrl = "https://dummyjson.com/auth";
+
+// 🔹 Sign in
+function signIn(username, password) {
+  return fetch(`${baseUrl}/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({  name, email, password }),
+    body: JSON.stringify({ username, password }),
   }).then(checkResponse);
 }
 
-function signIn(email, password) {
-  return fetch(`${baseUrl}/signin`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  }).then(checkResponse);
-}
-
+// 🔹 Verify token / get current user
 function checkToken(token) {
-  console.log(token);
-  console.log({ baseUrl });
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${baseUrl}/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 }
 
-export { signUp, signIn, checkToken };
+// 🔹 Logout (just clear localStorage)
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  return Promise.resolve();
+}
+
+export { signIn, checkToken, logout, checkResponse, getToken };

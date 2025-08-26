@@ -1,12 +1,13 @@
+import react, { useContext, useState, useEffect } from "react";
+import CartContext from "../utils/contexts/CartContext";
 import "../Cart/CartModal.css";
 import { itemOptions } from "../utils/constants";
 // import { CurrentCartContext } from "../utils/contexts/CurentCartContext";
 
-
 function Cart({ isOpen, handleCloseClick }) {
   // need to access cart array here
   // need to be able to update cart array (to delete items)
-  // const cartContext  = useContext(CurrentCartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   return (
     <section className={`cart ${isOpen ? "cart_opened" : ""}`}>
@@ -14,10 +15,10 @@ function Cart({ isOpen, handleCloseClick }) {
         <button
           className="cart__modal-close"
           type="button"
-          onClick={ handleCloseClick }
+          onClick={handleCloseClick}
         ></button>
         <div>
-        <h2 className="cart__modal-heading">Your Shopping Cart</h2>
+          <h2 className="cart__modal-heading">Your Shopping Cart</h2>
         </div>
         <ul className="cart__items">
           <li className="cart__item">
@@ -28,7 +29,15 @@ function Cart({ isOpen, handleCloseClick }) {
             />
             <p className="cart__item">{itemOptions.name}</p>
             <p className="cart__item-price">{itemOptions.price}</p>
-            <button className="cart__remove-item"> remove </button>
+            <button
+              className="cart__remove-item"
+              onClick={() => {
+                deleteItem;
+              }}
+            >
+              {" "}
+              remove{" "}
+            </button>
           </li>
         </ul>
         <button className="cart__modal-confirm" type="submit">
