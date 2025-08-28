@@ -53,4 +53,5 @@
   overflow: hidden;
   width: 328px;
   height: 328px;
+  z-index: -1;
 }

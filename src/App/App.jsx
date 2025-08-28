@@ -18,19 +18,12 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import { itemOptions } from "../utils/constants";
 import { AuthContext } from "../utils/contexts/AuthContext";
-import {
-  getCart,
-  addToCart,
-  createCart,
-  removeFromCart,
-  getUser,
-} from "../utils/DummyJsonApi";
 import { CurrentCardContext } from "../utils/contexts/CurrentCardContext";
 import { UserContext } from "../utils/contexts/UserContext";
 import CartContext from "../utils/contexts/CartContext";
 import ShopContent from "../Shop/ShopContent";
-import { checkToken, signIn } from "../utils/auth";
-import Profile from "../Profile/Profile";
+import { checkToken, signIn, signUp } from "../utils/auth";
+import { createCart, getCart, addToCart, removeFromCart } from "../utils/api";
 
 // import Carousel from "../Carousel/Carousel";
 
@@ -52,9 +45,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   //const [token, setToken] = ...
 
-  const handleAddToCart = (bakeryItem) => {
-    addItem(bakeryItem.Id)
-      .then((res) => {
+  const handleAddToCart = (item) => {
+    if (!cart) {
+      createCart(cart).then((res) => {
+        console.log("cart created");
+      });
+    }
+    addItem(item.Id)
+      .next((res) => {
         console.log("item added", res.data);
         // If the backend returns the updated user/cart, you can update state here
         setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
@@ -73,19 +71,17 @@ function App() {
     setActiveModal("cart");
   };
 
-  const handleRemoveItem = (bakeryItem) => {
-    removeFromCart(bakeryItem.Id).then((res) => {
+  const handleRemoveItem = (item) => {
+    removeFromCart(item.Id).then((res) => {
       setCart(res.data.cart);
     });
   };
 
-  const handleAddItem = (bakeryItem) => {
-    AddToCart(bakeryItem).then((res) => {
+  const handleAddItem = (item) => {
+    addToCart(item.Id).then((res) => {
       setCart(res.data.cart);
     });
   };
-
-  const handleShopClick = (item) => {};
 
   const handleSignupClick = () => {
     setActiveModal("signup");
@@ -93,10 +89,6 @@ function App() {
 
   const handleLoginClick = () => {
     setActiveModal("login");
-  };
-
-  const editProfileClick = () => {
-    setActiveModal("edit");
   };
 
   const handleItemClick = (item) => {
@@ -108,6 +100,10 @@ function App() {
     console.log(e);
     setActiveModal("");
   };
+
+  const closeActiveModal = (e) => {
+    setActiveModal("");
+  }
 
   // const handleAddToCart = (item) => {
   //   setCart((prevCart) => {
@@ -121,28 +117,17 @@ function App() {
   //   });
   // };
 
-  const handleProfileEdit = ({ name }) => {
-    // token is a function
-    // localStorage.getItem('jwt')
-    editProfile({ name }, localStorage.getItem("jwt"))
+  const handleLogin = (email, password) => {
+    signIn(email, password)
       .then((res) => {
-        // update current user
-        setCurrentUser(res);
+        localStorage.setItem("jwt", res.token);
+        checkToken(res.token).then((res) => {
+          setIsLoggedIn(true);
+          setCurrentUser(res);
+        });
         closeActiveModal();
       })
       .catch(console.error);
-  };
-
-  const handleLogin = async (username, password) => {
-    try {
-      const data = await signIn(username, password);
-      setToken(data.accessToken);
-      setUser(data);
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data));
-      return data;
-      closeActiveModal();
-    } catch (err) {}
   };
 
   const handleLogOut = (user) => {
@@ -159,32 +144,6 @@ function App() {
       })
       .catch(console.error);
     closeActiveModal();
-  };
-
-  const handleItemLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
-    // Check if this card is not currently liked
-    !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        api
-          // the first argument is the card's id
-          .addItemLike(id, token)
-          .then((updatedItem) => {
-            setItems((items) =>
-              items.map((item) => (item.Id === id ? updatedItem : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-        api
-          // the first argument is the card's id
-          .removeItemLike(id, token)
-          .then((updatedItem) => {
-            setClothingItems((items) =>
-              items.map((item) => (item.Id === id ? updatedItem : item))
-            );
-          })
-          .catch((err) => console.log(err));
   };
 
   // on page load fetch to get all the bakers items so that we can display them on the frontend
@@ -243,8 +202,6 @@ function App() {
                     path="/Shop"
                     element={
                       <ShopContent
-                        handleItemLike={handleItemLike}
-                        onItemLike={handleItemLike}
                         handleCartClick={handleCartClick}
                         handleItemClick={handleItemClick}
                       />
@@ -258,19 +215,13 @@ function App() {
                         handleCartClick={handleCartClick}
                         items={items}
                         handleItemClick={handleItemClick}
-                        onItemLike={handleItemLike}
                       />
                     }
                   />
                   <Route
                     path="/"
                     element={
-                      <Main
-                        handleItemClick={handleItemClick}
-                        items={items}
-                        onItemLike={handleItemLike}
-                        handleItemLike={handleItemLike}
-                      />
+                      <Main handleItemClick={handleItemClick} items={items} />
                     }
                   />
                 </Routes>
@@ -289,7 +240,6 @@ function App() {
                   selectedItem={selectedItem}
                   handleAddToCart={handleAddToCart}
                   handleAddItem={handleAddItem}
-                  handleItemLike={handleItemLike}
                 ></ItemModal>
                 <SignupModal
                   onClick={handleCloseClick}
@@ -303,12 +253,6 @@ function App() {
                   onSubmit={handleLogin}
                   handleSignupClick={handleSignupClick}
                 />
-                <EditModal
-                  handleCloseClick={handleCloseClick}
-                  isOpen={activeModal === "edit"}
-                  onSubmit={handleProfileEdit}
-                />
-                <logoutModal handleLogoutClick={handleLogOut} />
               </div>
             </AuthContext.Provider>
           </UserContext.Provider>

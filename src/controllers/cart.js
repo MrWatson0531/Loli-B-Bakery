@@ -1,4 +1,4 @@
-import APIError, { APIError } from "../utils/api";
+import APIError, { APIError } from "../utils/APIerror";
 
 const controller = {};
 

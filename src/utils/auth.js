@@ -1,3 +1,5 @@
+// import { baseUrl } from "./api";
+
 function getToken() {
   return localStorage.getItem("jwt");
 }
@@ -6,23 +8,32 @@ function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
-const baseUrl = "https://dummyjson.com/auth";
+function signUp(email, password){
+  return fetch(`/signup`,{
+    method:"POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({email, password}),
+  }).then(checkResponse)
+}
 
 // 🔹 Sign in
-function signIn(username, password) {
-  return fetch(`${baseUrl}/login`, {
+function signIn(email, password) {
+  return fetch(`/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
 
 // 🔹 Verify token / get current user
 function checkToken(token) {
-  return fetch(`${baseUrl}/me`, {
+  return fetch(`/users/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -39,4 +50,4 @@ function logout() {
   return Promise.resolve();
 }
 
-export { signIn, checkToken, logout, checkResponse, getToken };
+export { signIn, checkToken, logout, checkResponse, getToken, signUp };

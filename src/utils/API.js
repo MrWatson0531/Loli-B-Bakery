@@ -1,13 +1,50 @@
-const baseUrl = "http://localhost:3001";
+export const {baseUrl} = "http://localhost:3001";
+function checkResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+} 
 
-class APIError extends Error {
-  constructor(message, code = 500, errors = null) {
-    super(message);
+function createCart({cart}) {
+  return fetch(`${baseUrl}/users/cart`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({cart}),
+  }).then(checkResponse);
+}
 
-    this.message = message;
-    this.status = code;
-    this.errors = errors;
-  }
-};
+function getCart({ user }) {
+  return fetch(`${baseUrl}/users/cart`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ user }),
+  }).then(checkResponse);
+}
 
-module.exports = APIError;
+function addToCart({ item }) {
+  return fetch(`${baseUrl}/users/cart`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ item }),
+  }).then(checkResponse);
+}
+
+function removeFromCart({ item }) {
+  return fetch(`${baseUrl}/user/cart`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ item }),
+  }).then(checkResponse);
+}
+
+export { createCart, getCart, addToCart, removeFromCart, checkResponse };

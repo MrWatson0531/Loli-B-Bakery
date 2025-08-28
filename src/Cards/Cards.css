@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.card{
+  display:flex;
+}
+
 .card__image {
   border-radius: 5%;
   width: 375px;
