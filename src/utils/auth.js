@@ -1,4 +1,4 @@
-// import { baseUrl } from "./api";
+import { baseUrl } from "./api";
 
 function getToken() {
   return localStorage.getItem("jwt");
@@ -8,32 +8,32 @@ function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
-function signUp(email, password){
-  return fetch(`/signup`,{
-    method:"POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({email, password}),
-  }).then(checkResponse)
-}
-
-// 🔹 Sign in
-function signIn(email, password) {
-  return fetch(`/signin`, {
+function signUp(data) {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(data),
+  }).then(checkResponse);
+}
+
+// 🔹 Sign in
+function signIn(data) {
+  return fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   }).then(checkResponse);
 }
 
 // 🔹 Verify token / get current user
 function checkToken(token) {
-  return fetch(`/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",

@@ -12,8 +12,6 @@ import CartModal from "../Cart/CartModal";
 import ItemModal from "../ItemModal/ItemModal";
 import SignupModal from "../userModal/SignupModal";
 import LoginModal from "../userModal/LoginModal";
-import EditModal from "../userModal/EditModal";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import { carousel } from "../Carousel/carousel";
 import { Routes, Route } from "react-router-dom";
 import { itemOptions } from "../utils/constants";
@@ -51,8 +49,8 @@ function App() {
         console.log("cart created");
       });
     }
-    addItem(item.Id)
-      .next((res) => {
+    addToCart(item.Id)
+      .then((res) => {
         console.log("item added", res.data);
         // If the backend returns the updated user/cart, you can update state here
         setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
@@ -103,7 +101,7 @@ function App() {
 
   const closeActiveModal = (e) => {
     setActiveModal("");
-  }
+  };
 
   // const handleAddToCart = (item) => {
   //   setCart((prevCart) => {
@@ -117,15 +115,15 @@ function App() {
   //   });
   // };
 
+  // runs when we submit login modal
   const handleLogin = (email, password) => {
+    // make a fetch to log the user in
     signIn(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        checkToken(res.token).then((res) => {
-          setIsLoggedIn(true);
-          setCurrentUser(res);
-        });
-        closeActiveModal();
+        setCurrentUser(res);
+        setIsLoggedIn(true);
+       closeActiveModal();
       })
       .catch(console.error);
   };
@@ -134,7 +132,6 @@ function App() {
     setCurrentUser(null);
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
-    closeActiveModal();
   };
 
   const handleSignup = ({ email, password, name }) => {
@@ -177,9 +174,8 @@ function App() {
               value={{
                 currentUser,
                 isLoading,
-
-                handleLogin: handleLogin,
-                handleLogOut: handleLogOut,
+                 handleLogin,
+                handleLogOut,
               }}
             >
               <div className="page__content">

@@ -4,7 +4,7 @@ function ItemCard({ item, handleItemClick, handleLike, handleItemLike }) {
   return (
     <li className="card" key={item._id}>
       {/* 🔹 Clicking image or name opens details */}
-      <div onClick={() => handleItemClick(item)}>
+      <div className="card__surface" onClick={() => handleItemClick(item)}>
         <img src={item?.url} alt={item?.name} className="card__image" />
         <div className="card__info">
           <h2 className="card__price">{item?.price}</h2>

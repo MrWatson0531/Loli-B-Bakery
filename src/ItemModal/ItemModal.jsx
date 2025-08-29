@@ -7,7 +7,7 @@ function ItemModal({
   isOpen,
   handleCloseClick,
   handleAddToCart,
-  selectedItem,
+  item,
 }) {
   return (
     <section className={`itemModal ${isOpen ? "itemModal_opened" : ""}`}>
@@ -17,14 +17,14 @@ function ItemModal({
           type="button"
           onClick={handleCloseClick}
         ></button>
-        <img src={selectedItem?.url} alt="" className="itemModal__image" />
+        <img src={item?.url} alt="" className="itemModal__image" />
         <div className="itemModal__footer">
           <div className="itemModal__info-block">
-            <h2 className="itemModal__label">{selectedItem?.name}</h2>
-            <h2 className="itemModal__price">{ selectedItem?.price }</h2>
+            <h2 className="itemModal__label">{item?.name}</h2>
+            <h2 className="itemModal__price">{ item?.price }</h2>
             <button
               className="itemModal__button"
-              onClick={() => handleAddToCart(selectedItem)}
+              onClick={() => handleAddToCart(item)}
               type="button"
             >
               Add to Cart

@@ -53,5 +53,9 @@
   overflow: hidden;
   width: 328px;
   height: 328px;
-  z-index: -1;
+}
+
+.card__surface {
+  display: flex;
+  flex-direction: column;
 }
