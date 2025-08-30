@@ -121,11 +121,17 @@ function App() {
     signIn(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        setCurrentUser(res);
+        checkToken(res.token);
         setIsLoggedIn(true);
-       closeActiveModal();
+        setCurrentUser(res);
+
+        closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log("No user logged in:", err.message);
+        setIsLoggedIn(false);
+        setCurrentUser(null);
+      });
   };
 
   const handleLogOut = (user) => {
@@ -152,18 +158,18 @@ function App() {
   //     .catch(console.error);
   // }, []);
 
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkToken(jwt)
-        .then((res) => {
-          console.log(res);
-          setIsLoggedIn(true);
-          setCurrentUser(res);
-        })
-        .catch(console.error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     checkToken(jwt)
+  //       .then((res) => {
+  //         console.log(res);
+  //         setIsLoggedIn(true);
+  //         setCurrentUser(res);
+  //       })
+  //       .catch(console.error);
+  //   }
+  // }, []);
 
   return (
     <div className="page">
@@ -174,8 +180,8 @@ function App() {
               value={{
                 currentUser,
                 isLoading,
-                 handleLogin,
-                handleLogOut,
+                 handleLogin: handleLogin,
+                handleLogOut: handleLogOut,
               }}
             >
               <div className="page__content">
