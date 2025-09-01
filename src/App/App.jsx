@@ -21,7 +21,12 @@ import { UserContext } from "../utils/contexts/UserContext";
 import CartContext from "../utils/contexts/CartContext";
 import ShopContent from "../Shop/ShopContent";
 import { checkToken, signIn, signUp } from "../utils/auth";
-import { createCart, getCart, addToCart, removeFromCart } from "../utils/api";
+import {
+  createCart,
+  getCart,
+  addToCart,
+  removeFromCart,
+}from "../utils/api";
 
 // import Carousel from "../Carousel/Carousel";
 
@@ -180,7 +185,7 @@ function App() {
               value={{
                 currentUser,
                 isLoading,
-                 handleLogin: handleLogin,
+                handleLogin: handleLogin,
                 handleLogOut: handleLogOut,
               }}
             >
