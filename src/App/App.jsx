@@ -26,7 +26,7 @@ import {
   getCart,
   addToCart,
   removeFromCart,
-}from "../utils/api";
+}from "../utils/api.js";
 
 // import Carousel from "../Carousel/Carousel";
 
