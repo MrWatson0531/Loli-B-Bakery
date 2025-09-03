@@ -13,9 +13,13 @@ function ShopContent({ handleItemClick, handleLike, handleItemLike }) {
 
   // Filter based on activeTab
   let filteredItems =
-    activeTab === "all"
-      ? itemOptions
-      : itemOptions.filter((item) => item.type === activeTab);
+  activeTab === "all"
+    ? itemOptions
+    : itemOptions.filter((item) =>
+        item.name.toLowerCase().includes(activeTab.toLowerCase())
+      );
+
+      
 
   return (
     <section className="shop">

@@ -10,7 +10,7 @@ function Footer({ handleSocialClick, handleTermsClick, handlePrivacyClick }) {
        <div> <p className="footer__legal">PRIVACY POLICY</p></div>
       </div>
       <p className="footer__signature">
-        Website Design and Build by VMW Digital Solutions ltd.
+        Website Design and Build by Mike Watson
       </p>
     </section>
   );
