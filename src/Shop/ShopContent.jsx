@@ -1,13 +1,18 @@
+import { useState } from "react";
+import { itemOptions } from "../utils/constants";
+import ItemCard from "../ItemCard/ItemCard";
+import { useCart } from "../utils/contexts/CartContext";
+
 function ShopContent({ handleItemClick, handleLike, handleItemLike }) {
-  const { loading, updateQuantity } = useCart();
+  // const { loading, updateQuantity } = useCart();
 
   // Track which category is selected
   const [activeTab, setActiveTab] = useState("all");
 
-  if (loading) return <p>Loading cart...</p>;
+  // if (loading) return <p>Loading cart...</p>;
 
   // Filter based on activeTab
-  const filteredItems =
+  let filteredItems =
     activeTab === "all"
       ? itemOptions
       : itemOptions.filter((item) => item.type === activeTab);

@@ -28,9 +28,11 @@
   padding: 0;
   flex-wrap: wrap;
   flex-direction: row;
-  overflow: hidden;
+  overflow: scroll;
   justify-content: space-evenly;
 }
+
+
 
 .card__info{
   

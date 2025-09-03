@@ -1,4 +1,7 @@
 .shop{
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
 }
 
 .shop__content{
@@ -7,13 +10,14 @@
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    height: 100%;
 }
 .shop__main{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin: 50px 20px 50px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .shop__type-button{
     display: flex;
@@ -30,5 +34,11 @@
 
 .shop__cards{
     display: flex;
+    flex-wrap: wrap;
+}
+
+.shop__container{
+    display: flex;
+    height: 100%;
     flex-wrap: wrap;
 }

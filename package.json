@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "homepage": "https://MrWatson13.github.io/personal_Loli-B-Bakery/",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./dist/* realbluntgaming@outlook.com:/home/realbluntgaming/frontend"
+    "deploy": "scp -r ./dist/* realbluntgaming@loli-b-bakery.smelly.cc:/home/realbluntgaming/frontend"
   },
   "dependencies": {
     "axios": "^1.11.0",

@@ -26,7 +26,7 @@ import {
   getCart,
   addToCart,
   removeFromCart,
-}from "../utils/api.js";
+} from "../utils/api.js";
 
 // import Carousel from "../Carousel/Carousel";
 
@@ -139,6 +139,31 @@ function App() {
       });
   };
 
+  const handleModalOverlayClick = (e) => {
+    e.currentTarget === e.target
+      ? closeActiveModal()
+      : console.log("not closed");
+  };
+
+  useEffect(() => {
+    //if a modal is open, then add the keydown event listener
+    if (activeModal !== "") {
+      const handleEscapeClose = (e) => {
+        if (e.key === "Escape") {
+          closeActiveModal();
+        }
+      };
+      document.addEventListener("keydown", handleEscapeClose);
+    }
+
+    // cleanup function
+    return () => {
+      console.log("cleanup function has run");
+      //remove the keydown event listener
+      document.removeEventListener("keydown", {});
+    };
+  }, [activeModal, closeActiveModal]);
+
   const handleLogOut = (user) => {
     setCurrentUser(null);
     setIsLoggedIn(false);
@@ -237,6 +262,8 @@ function App() {
                   isOpen={activeModal === "cart"}
                   handleCloseClick={handleCloseClick}
                   handleRemoveItem={handleRemoveItem}
+                  onClick={handleModalOverlayClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                   cart={cart}
                   setCart={setCart}
                 ></CartModal>
@@ -247,18 +274,21 @@ function App() {
                   selectedItem={selectedItem}
                   handleAddToCart={handleAddToCart}
                   handleAddItem={handleAddItem}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 ></ItemModal>
                 <SignupModal
-                  onClick={handleCloseClick}
+                  handleCloseClick={handleCloseClick}
                   isOpen={activeModal === "signup"}
                   onSubmit={handleSignup}
                   handleLoginClick={handleLoginClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 />
                 <LoginModal
-                  onClick={handleCloseClick}
+                  handleCloseClick={handleCloseClick}
                   isOpen={activeModal === "login"}
                   onSubmit={handleLogin}
                   handleSignupClick={handleSignupClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 />
               </div>
             </AuthContext.Provider>
