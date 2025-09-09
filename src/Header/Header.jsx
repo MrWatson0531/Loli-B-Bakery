@@ -1,11 +1,10 @@
 import "../Header/Header.css";
 import Logo from "../assets/images/Loli_B_Logo.png";
 import { Link } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute" ;
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import cart from "../assets/images/ShoppingCart.jpg";
 import { useContext } from "react";
 import { UserContext } from "../utils/contexts/UserContext";
-
 
 function Header({
   handleHomeClick,
@@ -16,8 +15,7 @@ function Header({
   handleSignupClick,
   handleLogoutClick,
 }) {
-
-  const {isLoggedIn, currentUser} = useContext(UserContext);
+  const { isLoggedIn, currentUser } = useContext(UserContext);
 
   return (
     <header className="header">
@@ -74,16 +72,23 @@ function Header({
               </Link>
             </li>
 
-            {!isLoggedIn && 
-            (<>
-            <button
-              className="header__signup"
-              onClick={handleSignupClick}
-              type="button"
-            >
-              "Sign up / Log in"
-            </button>
-            </>)}
+            {!isLoggedIn ? (
+              <>
+                <button
+                  className="header__signup"
+                  onClick={handleSignupClick}
+                  type="button"
+                >
+                  Sign up / Log in
+                </button>
+              </>
+            ) : (
+              <button
+                className="header__logout"
+                onClick={handleLogoutClick}
+                type="button"
+              >Log out</button>
+            )}
             <button
               alt="shopping-cart"
               className="header__nav-cart"

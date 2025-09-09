@@ -32,12 +32,9 @@
 .body__content {
   justify-items: center;
   position: relative;
-  z-index: 1;
 }
 
 .body__parallax {
-  background: url(src/assets/loli_B_assets/LoliStockVid2.mp4) fixed center
-    no-repeat cover;
   position: relative;
   overflow: hidden;
   object-fit: cover;
