@@ -13,7 +13,7 @@ function Header({
   handleShopClick,
   handleContactClick,
   handleSignupClick,
-  handleLogoutClick,
+  handleLogout,
 }) {
   const { isLoggedIn, currentUser } = useContext(UserContext);
 
@@ -83,11 +83,13 @@ function Header({
                 </button>
               </>
             ) : (
+              <>
               <button
                 className="header__logout"
-                onClick={handleLogoutClick}
+                onClick={handleLogout}
                 type="button"
-              >Log out</button>
+              >Sign out</button>
+              </>
             )}
             <button
               alt="shopping-cart"

@@ -34,7 +34,7 @@ const SignupModal = ({
       onSubmit={handleSubmit}
       handleLoginClick={handleLoginClick}
     ><button
-          className="signup__close"
+          className="modal__close"
           type="button"
           onClick={handleCloseClick}
         ></button>

@@ -3,17 +3,16 @@ import "../ItemModal/ItemModal.css";
 import { useContext } from "react";
 import { CurrentCardContext } from "../utils/contexts/CurrentCardContext";
 
-function ItemModal({ isOpen, handleCloseClick, handleAddToCart, item, handleModalOverlayClose }) {
+function ItemModal({ isOpen, handleCloseClick, handleAddToCart, item, handleModalOverlayClick }) {
   return (
     <section
       className={`itemModal  ${isOpen ? "itemModal_opened" : ""}`}
-      
-    >
+      onClick= {handleModalOverlayClick}>
       <div className="itemModal__surface" onClick={(e) => {
         // if the element we clicked on is this exact section element, then we close the modal
         if (e.target === e.currentTarget) {
           
-          handleModalOverlayClose()
+          handleModalOverlayClick()
         }else{
           console.log("not closed")
         }

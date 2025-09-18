@@ -154,6 +154,12 @@
   border: 0;
 }
 
+.logout__section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .modal__btn-block {
   display: flex;
 }

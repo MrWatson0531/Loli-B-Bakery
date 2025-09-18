@@ -9,6 +9,7 @@ import Body from "../Body/Body";
 import Shop from "../Shop/ShopContent";
 import Contact from "../Contact/Contact";
 import CartModal from "../Cart/CartModal";
+import LogoutModal from "../userModal/LogoutModal.jsx";
 import ItemModal from "../ItemModal/ItemModal";
 import SignupModal from "../userModal/SignupModal";
 import LoginModal from "../userModal/LoginModal";
@@ -49,16 +50,17 @@ function App() {
   //const [token, setToken] = ...
 
   const handleAddToCart = (item) => {
-    if (!cart) {
-      createCart(cart).then((res) => {
-        console.log("cart created");
-      });
-    }
-    addToCart(item.Id)
+    // if (!cart) {
+    //   createCart(cart).then((res) => {
+    //     console.log("cart created");
+    //   });
+    // }
+    addToCart(item)
       .then((res) => {
-        console.log("item added", res.data);
+        console.log("item added", res.cart);
         // If the backend returns the updated user/cart, you can update state here
-        setCart(res.data.cart); // Assuming res.data.cart is the updated cart array
+        console.log(1);
+        setCart(res.cart); // Assuming res.data.cart is the updated cart array
       })
       .catch((err) => {
         console.error("Error adding to cart:", err);
@@ -66,22 +68,45 @@ function App() {
     setActiveModal("");
   };
 
-  const handleCartClick = () => {
-    getCart(cart).then((res) => {
-      console.log("Cart fetched", res.data);
-      setCart(res.data.cart);
-    });
-    setActiveModal("cart");
+  const handleLogoutClick = () => {
+    setActiveModal("logout");
   };
 
-  const handleRemoveItem = (item) => {
-    removeFromCart(item.Id).then((res) => {
-      setCart(res.data.cart);
-    });
+  const handleRemove = (id) => {
+    console.log(2);
+    setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+  };
+
+  const handleCartClick = () => {
+    getCart(cart)
+      .then((res) => {
+        const cartData = res?.cart; // ✅ correct path
+        const ids = new Set(Object.keys(res.cart)); // {2,3,5,7,16}
+        setCart(
+          itemOptions.filter((item) => {
+            return ids.has(item._id);
+          })
+        );
+        console.log("Cart fetched", cartData);
+        setActiveModal("cart");
+        // setCart(
+        //   Object.keys(cartData)
+        //     .map((name) => {
+        //       const item = items.find((i) => String(i.name) === String(name));
+        //       return item ? { ...item, quantity: cartData[name] } : null;
+        //     })
+        //     .filter(Boolean)
+        // );
+      })
+      .catch((err) => {
+        console.error("Error fetching cart:", err);
+        setCart([]);
+      });
   };
 
   const handleAddItem = (item) => {
-    addToCart(item.Id).then((res) => {
+    addToCart(item).then((res) => {
+      console.log(6);
       setCart(res.data.cart);
     });
   };
@@ -108,18 +133,6 @@ function App() {
     setActiveModal("");
   };
 
-  // const handleAddToCart = (item) => {
-  //   setCart((prevCart) => {
-  //     const currentItem = prevCart.find((i) => i.id === item.id);
-
-  //     if (currentItem) {
-  //       return prevCart.map((i) =>
-  //       i.id === item.id ? {...i, quantity: i.quantity + 1} : i);
-  //     }
-  //     return [...prevCart, {...item, quantity: 1}];
-  //   });
-  // };
-
   // runs when we submit login modal
   const handleLogin = (email, password) => {
     // make a fetch to log the user in
@@ -129,6 +142,7 @@ function App() {
         checkToken(res.token);
         setIsLoggedIn(true);
         setCurrentUser(res);
+        // res.cart is the cart
 
         closeActiveModal();
       })
@@ -137,6 +151,12 @@ function App() {
         setIsLoggedIn(false);
         setCurrentUser(null);
       });
+  };
+
+  const handleLogout = (user) => {
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+    localStorage.removeItem("jwt");
   };
 
   const handleModalOverlayClick = (e) => {
@@ -164,12 +184,6 @@ function App() {
     };
   }, [activeModal, closeActiveModal]);
 
-  const handleLogOut = (user) => {
-    setCurrentUser(null);
-    setIsLoggedIn(false);
-    localStorage.removeItem("jwt");
-  };
-
   const handleSignup = ({ email, password, name }) => {
     signUp({ email, password, name })
       .then((res) => {
@@ -179,27 +193,22 @@ function App() {
     closeActiveModal();
   };
 
-  // on page load fetch to get all the bakers items so that we can display them on the frontend
-  // useEffect(() => {
-  //   getItems()
-  //     .then((itemOptions) => {
-  //       setItems(itemOptions);
-  //     })
-  //     .catch(console.error);
-  // }, []);
-
-  // useEffect(() => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     checkToken(jwt)
-  //       .then((res) => {
-  //         console.log(res);
-  //         setIsLoggedIn(true);
-  //         setCurrentUser(res);
-  //       })
-  //       .catch(console.error);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token) // API call that validates token
+        .then((res) => {
+          setIsLoggedIn(true);
+          setCurrentUser(res.user); // set user data from backend
+        })
+        .catch((err) => {
+          console.error("Token check failed:", err);
+          localStorage.removeItem("jwt"); // remove invalid token
+          setIsLoggedIn(false);
+          setCurrentUser(null);
+        });
+    }
+  }, []);
 
   return (
     <div className="page">
@@ -210,8 +219,9 @@ function App() {
               value={{
                 currentUser,
                 isLoading,
-                handleLogin: handleLogin,
-                handleLogOut: handleLogOut,
+                handleLogin,
+                handleLogout,
+                handleLogoutClick,
               }}
             >
               <div className="page__content">
@@ -219,6 +229,7 @@ function App() {
                   handleCartClick={handleCartClick}
                   handleSignupClick={handleSignupClick}
                   handleLoginClick={handleLoginClick}
+                  hanhdleLogout={handleLogout}
                 />
                 <Routes>
                   <Route
@@ -236,9 +247,9 @@ function App() {
                       <ShopContent
                         handleCartClick={handleCartClick}
                         handleItemClick={handleItemClick}
+                        items={items}
                       />
                     }
-                    items={items}
                   />
                   <Route
                     path="/Body"
@@ -261,12 +272,11 @@ function App() {
                 <CartModal
                   isOpen={activeModal === "cart"}
                   handleCloseClick={handleCloseClick}
-                  handleRemoveItem={handleRemoveItem}
                   onClick={handleModalOverlayClick}
-                  handleModalOverlayClick={handleModalOverlayClick}
+                  handleRemove={handleRemove}
                   cart={cart}
                   setCart={setCart}
-                ></CartModal>
+                />
                 <ItemModal
                   isOpen={activeModal === "item"}
                   handleCloseClick={handleCloseClick}
@@ -274,21 +284,28 @@ function App() {
                   selectedItem={selectedItem}
                   handleAddToCart={handleAddToCart}
                   handleAddItem={handleAddItem}
-                  handleModalOverlayClick={handleModalOverlayClick}
-                ></ItemModal>
+                  onClick={handleModalOverlayClick}
+                />
                 <SignupModal
                   handleCloseClick={handleCloseClick}
                   isOpen={activeModal === "signup"}
                   onSubmit={handleSignup}
                   handleLoginClick={handleLoginClick}
-                  handleModalOverlayClick={handleModalOverlayClick}
+                  onClick={handleModalOverlayClick}
                 />
                 <LoginModal
                   handleCloseClick={handleCloseClick}
                   isOpen={activeModal === "login"}
                   onSubmit={handleLogin}
                   handleSignupClick={handleSignupClick}
-                  handleModalOverlayClick={handleModalOverlayClick}
+                  onClick={handleModalOverlayClick}
+                />
+                <LogoutModal
+                  onSubmit={handleLogoutClick}
+                  handleCloseClick={handleCloseClick}
+                  handleLogout={handleLogout}
+                  onClick={handleModalOverlayClick}
+                  isOpen={activeModal === "logout"}
                 />
               </div>
             </AuthContext.Provider>
@@ -298,5 +315,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
