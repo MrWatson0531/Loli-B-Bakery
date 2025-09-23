@@ -8,6 +8,14 @@ import { Link } from "react-router-dom";
 function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
   return (
     <section className="body">
+      <div className="test-box">
+        Resize me! I should be:
+        <ul>
+          <li>Blue on desktop</li>
+          <li>Orange on tablet (≤768px)</li>
+          <li>Red on mobile (≤480px)</li>
+        </ul>
+      </div>
       <ParallaxProvider>
         <div className="body__parallax">
           <Parallax speed={-80}>
@@ -79,7 +87,7 @@ function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
           className="body__btn"
           type="button"
           id="body__shop-btn"
-          onClick={ handleShopClick }
+          onClick={handleShopClick}
           to="/Shop"
         >
           SHOP OUR DELICIOUS TREATS!

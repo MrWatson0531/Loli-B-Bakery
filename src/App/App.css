@@ -11,6 +11,34 @@
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.test-box {
+  background: steelblue;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .test-box {
+    background: orange;
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .test-box {
+    background: crimson;
+    font-size: 1rem;
+  }
+}
 @media screen and (max-width: 768px){
   .cards{
     grid-template-columns: repeat(2, 1fr);
@@ -21,14 +49,4 @@
   .cards{
     grid-template-columns: 1fr;
   }
-}
-
-@media screen and (max-width:480px){
-  .header{
-    ;
-  }
-}
-
-@media screen and (max-width: 480px){
-
 }
