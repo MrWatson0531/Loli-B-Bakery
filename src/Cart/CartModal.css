@@ -100,3 +100,11 @@
   flex-direction: row;
   margin-top: 20px;
 }
+
+@media(max-width: 480px){
+  .cart-modal{
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}

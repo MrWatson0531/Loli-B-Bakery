@@ -44,7 +44,7 @@ function addToCart(item) {
   }).then(checkResponse);
 }
 
-function removeFromCart({ item }) {
+function removeFromCart({ item }) { 
   return fetch(`${baseUrl}/cart`, {
     method: "DELETE",
     headers: {

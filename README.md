@@ -9,5 +9,10 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+for the final my additional page for submission will be the "about" page.
+
 Project domain - "https//MrWatson13/Loli-B-Bakery.github.io"
 Backend domain - https://github.com/MrWatson0531/loli-b-back2.git
+live site domain - "https//:loli-b-bakery.smelly.cc"
+
+test credentials - email - "test@test.com" password - "test"

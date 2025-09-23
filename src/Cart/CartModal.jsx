@@ -4,10 +4,15 @@ import "../Cart/CartModal.css";
 import { itemOptions } from "../utils/constants";
 // import { CurrentCartContext } from "../utils/contexts/CurentCartContext";
 
-function Cart({ isOpen, handleCloseClick, handleRemove, handleModalOverlayClick }) {
+function Cart({
+  isOpen,
+  handleCloseClick,
+  handleRemove,
+  handleModalOverlayClick,
+}) {
   const { cart } = useContext(CartContext);
 
-  console.log(cart)
+  console.log(cart);
 
   console.log(12321312312313);
   console.log(cart);
@@ -26,15 +31,16 @@ function Cart({ isOpen, handleCloseClick, handleRemove, handleModalOverlayClick 
 
   // function to remove item by id
   return (
-    <section className={`cart ${isOpen ? "cart_opened" : ""}`}
-    onClick= {handleModalOverlayClick}>
+    <section
+      className={`cart ${isOpen ? "cart_opened" : ""}`}
+      onClick={handleModalOverlayClick}
+    >
       <div className="cart__modal">
         <button
           type="button"
           onClick={handleCloseClick}
           className="cart__modal-close"
-        >
-        </button>
+        ></button>
 
         <h2 className="cart__modal-heading">Your Shopping Cart</h2>
 
@@ -44,25 +50,24 @@ function Cart({ isOpen, handleCloseClick, handleRemove, handleModalOverlayClick 
           ) : (
             cart.map((item) => (
               <li className="cart__item" key={item._id}>
-                
                 <div className="cart__item-details">
                   <img
-                  src={item.url}
-                  alt={item.name}
-                  className="cart__item-image"
-                />
+                    src={item.url}
+                    alt={item.name}
+                    className="cart__item-image"
+                  />
                   <p>{item.name}</p>
                   <p>{item.price}</p>
                   <p>Qty: {item.quantity}</p>
-                
-                <button
-                  className="cart__remove-item"
-                  onClick={() => handleRemove(item._id)}
-                >
-                  Remove
-                </button>
+
+                  <button
+                    className="cart__remove-item"
+                    onClick={() => handleRemove(item)}
+                  >
+                    Remove
+                  </button>
                 </div>
-             </li>
+              </li>
             ))
           )}
         </ul>
@@ -77,4 +82,4 @@ function Cart({ isOpen, handleCloseClick, handleRemove, handleModalOverlayClick 
   );
 }
 
-export default Cart; 
+export default Cart;

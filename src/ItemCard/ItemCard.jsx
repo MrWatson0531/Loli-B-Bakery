@@ -11,17 +11,6 @@ function ItemCard({ item, handleItemClick, handleLike, handleItemLike }) {
           <h2 className="card__name">{item?.name}</h2>
         </div>
       </div>
-
-      {/* 🔹 Like Button */}
-       <button
-        className={`card__like-button ${item.liked ? "liked" : ""}`}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleLike(item);
-        }}
-      >
-        {item.liked ? "❤️" : "🤍"}
-      </button>
     </li>
   );
 }

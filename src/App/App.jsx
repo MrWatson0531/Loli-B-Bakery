@@ -72,9 +72,15 @@ function App() {
     setActiveModal("logout");
   };
 
-  const handleRemove = (id) => {
+  const handleRemove = (item) => {
     console.log(2);
-    setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+    removeFromCart({item})
+      .then((res) => {
+        setCart((prevCart) => prevCart.filter((currentItem) => item._id !== currentItem._id));
+      })
+      .catch((err) => {
+        console.error("error removing item");
+      });
   };
 
   const handleCartClick = () => {
