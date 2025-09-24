@@ -4,6 +4,10 @@ function getToken() {
   return localStorage.getItem("jwt");
 }
 
+function setToken() {
+  return localStorage.setItem()
+}
+
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }

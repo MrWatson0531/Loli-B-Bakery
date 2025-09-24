@@ -84,11 +84,13 @@ function Header({
               </>
             ) : (
               <>
-              <button
-                className="header__logout"
-                onClick={handleLogout}
-                type="button"
-              >Sign out</button>
+                <button
+                  className="header__logout"
+                  onClick={handleLogout}
+                  type="button"
+                >
+                  Sign out
+                </button>
               </>
             )}
             <button

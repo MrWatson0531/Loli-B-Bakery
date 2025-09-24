@@ -72,11 +72,19 @@ function App() {
     setActiveModal("logout");
   };
 
+  const handleLogout = () => {
+    setCurrentUser({ name: "", email: "" });
+    setIsLoggedIn(false);
+    localStorage.setItem("jwt", "");
+  };
+
   const handleRemove = (item) => {
     console.log(2);
-    removeFromCart({item})
+    removeFromCart({ item })
       .then((res) => {
-        setCart((prevCart) => prevCart.filter((currentItem) => item._id !== currentItem._id));
+        setCart((prevCart) =>
+          prevCart.filter((currentItem) => item._id !== currentItem._id)
+        );
       })
       .catch((err) => {
         console.error("error removing item");
@@ -145,7 +153,6 @@ function App() {
     signIn(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        checkToken(res.token);
         setIsLoggedIn(true);
         setCurrentUser(res);
         // res.cart is the cart
@@ -157,12 +164,6 @@ function App() {
         setIsLoggedIn(false);
         setCurrentUser(null);
       });
-  };
-
-  const handleLogout = (user) => {
-    setCurrentUser(null);
-    setIsLoggedIn(false);
-    localStorage.removeItem("jwt");
   };
 
   const handleModalOverlayClick = (e) => {
@@ -235,7 +236,7 @@ function App() {
                   handleCartClick={handleCartClick}
                   handleSignupClick={handleSignupClick}
                   handleLoginClick={handleLoginClick}
-                  hanhdleLogout={handleLogout}
+                  handleLogout={handleLogout}
                 />
                 <Routes>
                   <Route
