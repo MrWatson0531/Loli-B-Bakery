@@ -41,26 +41,24 @@ function About({ handleShopClick, handleHomeClick }) {
         </Link>
       </div>
       <div className="about__lower-block">
-        <div>
-          <div className="about__lower-text-group">
-            <h2 className="about__header-2">Team Support</h2>
-            <div className="about__text-block">
-              <h2 className="about__header-3">
-                Social Media Mastermind - Jessica
-              </h2>
-              <p className="about__text">
-                My name is Jessica and I am the social media marketing manager
-                for Loli B Bakery. I am also the owner’s big sister! We are
-                super close and all about family! I can tell you first-hand her
-                treats are special, delicious, and made with lots of love. I am
-                passionate about getting the word out about Loli B Bakery’s
-                amazing desserts.
-              </p>
-            </div>
+        <div className="about__lower-text-group">
+          <h2 className="about__header-2">Team Support</h2>
+          <div className="about__text-block">
+            <h2 className="about__header-3">
+              Social Media Mastermind - Jessica
+            </h2>
+            <p className="about__text">
+              My name is Jessica and I am the social media marketing manager for
+              Loli B Bakery. I am also the owner’s big sister! We are super
+              close and all about family! I can tell you first-hand her treats
+              are special, delicious, and made with lots of love. I am
+              passionate about getting the word out about Loli B Bakery’s
+              amazing desserts.
+            </p>
           </div>
         </div>
-        <img src={Social} alt="social image" className="about__img-2" />
       </div>
+      <img src={Social} alt="social image" className="about__img" />
     </section>
   );
 }
