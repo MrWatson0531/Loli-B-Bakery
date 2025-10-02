@@ -2,17 +2,20 @@ import "../Footer/Footer.css";
 
 function Footer({ handleSocialClick, handleTermsClick, handlePrivacyClick }) {
   return (
-    <div className="footer">
+    <footer className="footer">
       <h2 className="footer__header">Loli B Bakery</h2>
       <img src="" alt="Instagram" className="footer__social" />
       <div className="footer__legal-section">
         <p className="footer__legal">TERMS & CONDITIONS</p>
-       <div> <p className="footer__legal">PRIVACY POLICY</p></div>
+        <div>
+          {" "}
+          <p className="footer__legal">PRIVACY POLICY</p>
+        </div>
       </div>
       <p className="footer__signature">
         Website Design and Build by Mike Watson
       </p>
-    </div>
+    </footer>
   );
 }
 

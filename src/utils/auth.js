@@ -1,4 +1,5 @@
 import { baseUrl } from "./api";
+import { checkResponse } from "./api";
 
 function getToken() {
   return localStorage.getItem("jwt");
@@ -8,9 +9,6 @@ function setToken() {
   return localStorage.setItem()
 }
 
-function checkResponse(res) {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-}
 
 function signUp(data) {
   return fetch(`${baseUrl}/signup`, {

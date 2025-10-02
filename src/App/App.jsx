@@ -50,11 +50,6 @@ function App() {
   //const [token, setToken] = ...
 
   const handleAddToCart = (item) => {
-    // if (!cart) {
-    //   createCart(cart).then((res) => {
-    //     console.log("cart created");
-    //   });
-    // }
     addToCart(item)
       .then((res) => {
         console.log("item added", res.cart);
@@ -138,11 +133,6 @@ function App() {
     setSelectedItem(item);
   };
 
-  const handleCloseClick = (e) => {
-    console.log(e);
-    setActiveModal("");
-  };
-
   const closeActiveModal = (e) => {
     setActiveModal("");
   };
@@ -174,20 +164,20 @@ function App() {
 
   useEffect(() => {
     //if a modal is open, then add the keydown event listener
-    if (activeModal !== "") {
-      const handleEscapeClose = (e) => {
-        if (e.key === "Escape") {
-          closeActiveModal();
-        }
-      };
-      document.addEventListener("keydown", handleEscapeClose);
-    }
+
+    if (activeModal === "") return;
+    const handleEscapeClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscapeClose);
 
     // cleanup function
     return () => {
       console.log("cleanup function has run");
       //remove the keydown event listener
-      document.removeEventListener("keydown", {});
+      document.removeEventListener("keydown", handleEscapeClose);
     };
   }, [activeModal, closeActiveModal]);
 
@@ -195,9 +185,9 @@ function App() {
     signUp({ email, password, name })
       .then((res) => {
         handleLogin({ email, password });
+        closeActiveModal();
       })
       .catch(console.error);
-    closeActiveModal();
   };
 
   useEffect(() => {
@@ -278,38 +268,38 @@ function App() {
                 <Footer />
                 <CartModal
                   isOpen={activeModal === "cart"}
-                  handleCloseClick={handleCloseClick}
-                  onClick={handleModalOverlayClick}
+                  handleCloseClick={closeActiveModal}
+                  handleModalOverlayClick={handleModalOverlayClick}
                   handleRemove={handleRemove}
                   cart={cart}
                   setCart={setCart}
                 />
                 <ItemModal
                   isOpen={activeModal === "item"}
-                  handleCloseClick={handleCloseClick}
+                  handleCloseClick={closeActiveModal}
                   item={selectedItem}
                   selectedItem={selectedItem}
                   handleAddToCart={handleAddToCart}
                   handleAddItem={handleAddItem}
-                  onClick={handleModalOverlayClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 />
                 <SignupModal
-                  handleCloseClick={handleCloseClick}
+                  handleCloseClick={closeActiveModal}
                   isOpen={activeModal === "signup"}
                   onSubmit={handleSignup}
                   handleLoginClick={handleLoginClick}
-                  onClick={handleModalOverlayClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 />
                 <LoginModal
-                  handleCloseClick={handleCloseClick}
+                  closeActiveModal={closeActiveModal}
                   isOpen={activeModal === "login"}
                   onSubmit={handleLogin}
                   handleSignupClick={handleSignupClick}
-                  onClick={handleModalOverlayClick}
+                  handleModalOverlayClick={handleModalOverlayClick}
                 />
                 <LogoutModal
                   onSubmit={handleLogoutClick}
-                  handleCloseClick={handleCloseClick}
+                  handleCloseClick={closeActiveModal}
                   handleLogout={handleLogout}
                   onClick={handleModalOverlayClick}
                   isOpen={activeModal === "logout"}

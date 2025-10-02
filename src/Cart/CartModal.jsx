@@ -1,5 +1,5 @@
 import react, { useContext, useState, useEffect } from "react";
-import CartContext from "../utils/contexts/CartContext";
+import CartContext, { useCart } from "../utils/contexts/CartContext";
 import "../Cart/CartModal.css";
 import { itemOptions } from "../utils/constants";
 // import { CurrentCartContext } from "../utils/contexts/CurentCartContext";
@@ -10,26 +10,23 @@ function Cart({
   handleRemove,
   handleModalOverlayClick,
 }) {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useCart();
 
-  console.log(cart);
+  // TODO: there is NO quantity
+  const totalPrice = cart.reduce((sum, item) => {
+    console.log("===========");
+    console.log(item);
+    return sum + item.price * item.quantity;
+  }, 0);
 
-  console.log(12321312312313);
-  console.log(cart);
+  const handleCheckout = () => {
+    alert(`✅ Mock Checkout complete! You paid $${totalPrice.toFixed(2)}`);
+    console.log(totalPrice);
 
-  // const entries = Object.entries(cart); // [[2, 1], [3, 2], ...]
-  // const items = entries.map((entry) => {
-  //   const itemOptions = []
-  //   const item = itemOptions.filter(function(item) {
-  //     return item.name == entry[0];
-  //   })[0];
+    setCart([]);
+    handleCloseClick();
+  };
 
-  //   // add the quantity
-
-  //   return item;
-  // });
-
-  // function to remove item by id
   return (
     <section
       className={`cart ${isOpen ? "cart_opened" : ""}`}
@@ -57,7 +54,7 @@ function Cart({
                     className="cart__item-image"
                   />
                   <p>{item.name}</p>
-                  <p>{item.price}</p>
+                  <p>${item.price}</p>
                   <p>Qty: {item.quantity}</p>
 
                   <button
@@ -73,7 +70,11 @@ function Cart({
         </ul>
 
         {cart.length > 0 && (
-          <button className="cart__modal-confirm" type="submit">
+          <button
+            className="cart__modal-confirm"
+            type="button"
+            onClick={handleCheckout}
+          >
             Check-Out
           </button>
         )}
