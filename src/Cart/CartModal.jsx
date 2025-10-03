@@ -10,14 +10,22 @@ function Cart({
   handleRemove,
   handleModalOverlayClick,
 }) {
-  const { cart, setCart } = useCart();
+  const  {cart, setCart}  = useCart();
 
   // TODO: there is NO quantity
-  const totalPrice = cart.reduce((sum, item) => {
-    console.log("===========");
-    console.log(item);
-    return sum + item.price * item.quantity;
-  }, 0);
+  // const totalPrice = cart.reduce((sum, item) => {
+  //   console.log("===========");
+  //   console.log(item);
+  //   return sum + item.price * item.quantity;
+  // }, 0);
+
+  const totalPrice = Array.isArray(cart)
+  ? cart.reduce(
+      (sum, item) =>
+        sum + (Number(item?.price) || 0) * (Number(item?.quantity) || 0),
+      0
+    )
+  : 0;
 
   const handleCheckout = () => {
     alert(`✅ Mock Checkout complete! You paid $${totalPrice.toFixed(2)}`);

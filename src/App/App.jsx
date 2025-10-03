@@ -49,6 +49,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   //const [token, setToken] = ...
 
+   const closeActiveModal = (e) => {
+    setActiveModal("");
+  };
+
   const handleAddToCart = (item) => {
     addToCart(item)
       .then((res) => {
@@ -60,7 +64,7 @@ function App() {
       .catch((err) => {
         console.error("Error adding to cart:", err);
       });
-    setActiveModal("");
+    closeActiveModal();
   };
 
   const handleLogoutClick = () => {
@@ -133,9 +137,7 @@ function App() {
     setSelectedItem(item);
   };
 
-  const closeActiveModal = (e) => {
-    setActiveModal("");
-  };
+ 
 
   // runs when we submit login modal
   const handleLogin = (email, password) => {
