@@ -21,7 +21,7 @@ function Body({ handleAboutClick, handleItemClick, handleShopClick, items }) {
           <Parallax speed={-80}>
             <video autoPlay loop muted className="background__video">
               <source
-                src="src/assets/images/LoliStockVid4.mov"
+                src="src/assets/images/LoliStockVid2.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
