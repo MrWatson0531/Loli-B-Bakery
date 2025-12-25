@@ -5,15 +5,17 @@ function ModalWithForm({
   children,
   buttonText,
   title,
-  onClick,
+  onClose,
   isOpen,
   onSubmit,
   id,
   modalContentMod,
-  modalForm
+  modalForm,
+  handleModalOverlayClick
 }) {
+  ;
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
+    <div className={`modal ${isOpen && "modal_opened"}`} onClick={handleModalOverlayClick} >
       <div className={modalContentMod}>
         <div className="modal__head">
         <h2 className="modal__title">{title}</h2>
@@ -22,7 +24,7 @@ function ModalWithForm({
           <button
             className="modal__close"
             type="button"
-            onClick={ onClick }
+            onClick={ onClose }
           ></button>
         </form>
         </div>

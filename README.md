@@ -12,7 +12,8 @@ Currently, two official plugins are available:
 for the final my additional page for submission will be the "about" page.
 
 Project domain - "https//MrWatson13/Loli-B-Bakery.github.io"
-Backend domain - https://github.com/MrWatson0531/loli-b-back2.git
-live site domain - "https//:loli-b-bakery.smelly.cc"
+Backend domain - [Backend](https://github.com/MrWatson0531/loli-b-back2.git)
+
+live site domain - [Loli Bakery](https://loli-b-bakery.smelly.cc)
 
 test credentials - email - "test@test.com" password - "test"

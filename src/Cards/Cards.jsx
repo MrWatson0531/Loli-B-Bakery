@@ -14,7 +14,7 @@ function Cards( {handleItemClick} ) {
       <ul className="cards__list" key="cards_list">
         {itemOptions
           .filter((item) => {
-            if (item.price === "$15.00") {
+            if (item.price === 15.00) {
               return item;
             }
           })

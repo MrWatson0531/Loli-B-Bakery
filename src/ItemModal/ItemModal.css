@@ -25,8 +25,8 @@
 
 .itemModal__surface{
   position: relative;
-  height: 600px;
-  width: 600px;
+  max-height: 600px;
+  max-width: 500px;
   background-color: rgb(48, 42, 104);
   overflow: hidden;
   border-radius: 10px;
@@ -86,6 +86,7 @@
 
 .itemModal__image{
   max-height: 530px;
+  width: 100%;
 }
 
 @media(max-width: 480px){
